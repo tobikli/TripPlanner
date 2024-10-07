@@ -25,11 +25,27 @@ Until the deadline all of your PRs **need to be merged** and your final app **ne
 
 ## Problem Statement (max. 500 words)
 
-TODO: Add your problem statement here. 
+**TripWise**
+
+Budgeting a planned or unplanned trip can be a hard time as many costs are not on your mind when planning. Therefore I would like an App that manages trips and vacations. It should focus on budgeting and time management, where the most important points like flight, accommodation, transport, food and activities are all corelated in the budget and schedule feature. 
+
+It should be able to give an overview of the upcoming trip, including the budget required, the schedule planned and additional useful information and statistics. 
+
+It should be able to create a trip plan and set a certain budget and allocate parts of it to each of the different categories.
+
+Furthermore it should fetch data like flight information and weather for the trip and give important notifications on upcoming events and unplanned changes.
+
+At last, it should summarize the trip afterwards with a comparison between planned spendings and actual spendings.
 
 ## Requirements
 
-TODO: Document the requirements you fulfilled with your app. Discuss them with your tutor.
+- Overview of upcoming trip with budget and schedule
+- Manual adding of all possible events including: Flights, Accommodation, Transportation, Visa, Food
+- Displaying schedule of Flights, Check-in and Check-out of Hotels using API
+- Displaying and fetching of local Weather using API
+- Calculation and assignment of budget to each category
+- Summary of trip including used budget and activites afterwards
+
 
 ## Analysis
 
