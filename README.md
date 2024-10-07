@@ -31,7 +31,7 @@ Budgeting a planned or unplanned trip can be a hard time as many costs are not o
 
 It should be able to give an overview of the upcoming trip, including the budget required, the schedule planned and additional useful information and statistics. 
 
-It should be able to create a trip plan accordingly and show a the set budget of it in each of the different categories.
+It should be able to create a trip plan accordingly and show the manually added budget of the user in each of the different categories.
 
 Furthermore it should fetch data like flight information and weather for the trip and give important notifications on upcoming events and unplanned changes, like delayed flights.
 
@@ -41,10 +41,9 @@ At last, it should summarize the trip afterwards with a comparison between plann
 
 The app should:
 - show an overview of upcoming trips with budget and schedule
-- handle manual user input for all possible events including: flights, accommodation, transportation, visa, food and allocate budget
+- handle manual user input with budget for all possible events including: flights, accommodation, transportation, visa and food
 - display schedule of flights, check-in and check-out of hotels using API
 - display and fetch of local weather and flight Information using API
-- calculate and assign the budget to each category
 - summarize the trip, including the used budget and activites, afterwards
 
 
