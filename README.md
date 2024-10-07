@@ -49,7 +49,7 @@ The app should:
 
 ## Analysis
 
-TODO: Include an analysis object model. You can use [draw.io](https://draw.io) or [apollon](https://apollon.ase.cit.tum.de) to create it. Please add all models as an Image - not as a link!
+![UML](/images/UMLClassDiagram.png)
 
 ## System Design
 
@@ -57,4 +57,12 @@ TODO: Include a system design overview describing your application.
 
 ## Product Backlog
 
-TODO: Add a product backlog and don't forget to update it with each MR.
+| Version | Task                | Done |
+| - | ------------------------- | ---- |
+| 1 | Create Trip               |      |
+| 2 | Add Location and Time     |      |
+| 3 | Add Budget                |      |
+| 3 | Add Events                |      |
+| 3 | See Schedule of Trip      |      |
+| 3 | Fetch FlightAPI           |      |
+| 3 | Fetch WeatherAPI          |      |
