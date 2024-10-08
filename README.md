@@ -25,7 +25,7 @@ Until the deadline all of your PRs **need to be merged** and your final app **ne
 
 ## Problem Statement (max. 500 words)
 
-**TripWise**
+**TripPlanner**
 
 Budgeting a planned or unplanned trip can be a hard time as many costs are not on your mind when planning. Therefore I would like an App that manages trips and vacations. It should focus on budgeting and time management, where the most important points like flight, accommodation, transport, food and activities are all corelated in the budget and schedule feature. 
 
@@ -53,16 +53,17 @@ The app should:
 
 ## System Design
 
-TODO: Include a system design overview describing your application.
+![UML](/images/SystemDesign.png)
+
 
 ## Product Backlog
 
-| Version | Task                | Done |
-| - | ------------------------- | ---- |
-| 1 | Create Trip               |      |
-| 2 | Add Location and Time     |      |
-| 3 | Add Budget                |      |
-| 3 | Add Events                |      |
-| 3 | See Schedule of Trip      |      |
-| 3 | Fetch FlightAPI           |      |
-| 3 | Fetch WeatherAPI          |      |
+| Version | Task                                | Done |
+| - | ----------------------------------------- | ---- |
+| 1 | Create UI for Trip creation               |      |
+| 2 | Add Location and Time to Trip             |      |
+| 3 | Add Budget UI                             |      |
+| 3 | Add Event creation UI                     |      |
+| 3 | See Schedule of Trip                      |      |
+| 3 | Fetch FlightAPI                           |      |
+| 3 | Fetch WeatherAPI                          |      |
