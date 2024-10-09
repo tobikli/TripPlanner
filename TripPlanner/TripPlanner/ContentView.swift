@@ -12,6 +12,7 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var trips: [Trip]
     @State private var showingAddItemView = false
+    let calendar = Calendar.current
 
     var body: some View {
         NavigationSplitView {
@@ -23,33 +24,33 @@ struct ContentView: View {
                         .fontWeight(.light)  // Bold text for emphasis
                     .padding(.top)}
                 List {
-                    Section(header: Text("Current Trips")){
+                    Section(header: Text("Current Trips")) {
                         ForEach(trips) { trip in
-                            if(trip.from <= Date() && trip.till >= Date()){
+                            if trip.from <= Date() && (calendar.isDate(trip.till, inSameDayAs: Date()) || trip.till > Date()) {
                                 NavigationLink {
-                                    Text("\(trip.name)")
+                                    TripView(trip: trip)
                                 } label: {
                                     ExtractedView(trip: trip)
                                 }
                             }
                         } .onDelete(perform: deleteItems)
                     }
-                    Section(header: Text("Future Trips")){
+                    Section(header: Text("Future Trips")) {
                         ForEach(trips) { trip in
-                            if(trip.from > Date()){
+                            if trip.from > Date() {
                                 NavigationLink {
-                                    Text("\(trip.name)")
+                                    TripView(trip: trip)
                                 } label: {
                                     ExtractedView(trip: trip)
                                 }
                             }
                         } .onDelete(perform: deleteItems)
                     }
-                    Section(header: Text("Past Trips")){
+                    Section(header: Text("Past Trips")) {
                         ForEach(trips) { trip in
-                            if(trip.till < Date()){
+                            if trip.till < Date() && !calendar.isDate(trip.till, inSameDayAs: Date())  {
                                 NavigationLink {
-                                    Text("\(trip.name)")
+                                    TripView(trip: trip)
                                 } label: {
                                     ExtractedView(trip: trip)
                                 }
@@ -64,7 +65,8 @@ struct ContentView: View {
                     ToolbarItem {
                         Button(action: {
                             showingAddItemView.toggle()
-                        }) {
+                        }
+                        ) {
                             Label("Add Item", systemImage: "plus")
                         }
                     }
@@ -85,22 +87,25 @@ struct ContentView: View {
         @Environment(\.dismiss) private var dismiss
         @Environment(\.modelContext) private var modelContext
 
-        @State private var name: String = ""
+        @State private var name: String = "My Awesome Trip"
         @State private var location: String = ""
         @State private var from: Date = Date()
         @State private var till: Date = Date()
-
+        @State private var budget: Double = 0.0
         
         var body: some View {
             NavigationView {
                 Form {
-                    Section(header: Text("Information")){
+                    Section(header: Text("Information")) {
                         TextField("Trip Name", text: $name)
                         TextField("Location", text: $location)
                     }
-                    Section(header: Text("Time")){
+                    Section(header: Text("Time")) {
                         DatePicker("From", selection: $from, displayedComponents: .date)
                         DatePicker("Till", selection: $till, displayedComponents: .date)
+                    }
+                    Section(header: Text("Budget")) {
+                        TextField("Initial Budget", value: $budget, format: .currency(code: "EUR")).keyboardType(.decimalPad)
                     }
                 }
                 .navigationTitle("Create New Trip")
@@ -111,7 +116,7 @@ struct ContentView: View {
                         }
                     }
                     ToolbarItem(placement: .confirmationAction) {
-                        Button("Save") {
+                        Button("Create") {
                             addItem()
                             dismiss()
                         }
@@ -150,20 +155,17 @@ struct ExtractedView: View {
                 Text(trip.name)
                     .font(.headline)
                     .fontWeight(.bold)
-                
                 Text("Your trip to \(trip.location)")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }
             .padding(.vertical, 4)
             Spacer()
-            VStack(alignment: .leading){
-                Text(trip.from, format: Date.FormatStyle(date: .abbreviated, time: .omitted)).fontWeight(.light).font(.system(size: 12))
-                HStack(){
+                HStack(alignment: .center) {
+                    Text(trip.from, format: Date.FormatStyle(date: .abbreviated, time: .omitted)).fontWeight(.light).font(.system(size: 12))
+                    Text("-")
                     Text(trip.till, format: Date.FormatStyle(date: .abbreviated, time: .omitted)).fontWeight(.light).font(.system(size: 12))
                 }
-            }
-            
         }
     }
 }
