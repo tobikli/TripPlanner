@@ -53,7 +53,7 @@ The app should:
 
 ## System Design
 
-![UML](/images/SystemDesign.png)
+![UML](/images/ComponentDiagram.png)
 
 
 ## Product Backlog
