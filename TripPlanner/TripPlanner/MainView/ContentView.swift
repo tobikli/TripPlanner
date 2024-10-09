@@ -15,13 +15,13 @@ struct ContentView: View {
     let calendar = Calendar.current
 
     var body: some View {
-        NavigationSplitView {
+        NavigationView {
             VStack {
                 if trips.isEmpty {
                     Spacer()
                     Text("No Trips yet")
-                        .font(.title)  // Customize font size, style, etc.
-                        .fontWeight(.light)  // Bold text for emphasis
+                        .font(.headline)
+                        .fontWeight(.light)
                     .padding(.top)}
                 List {
                     Section(header: Text("Current Trips")) {
@@ -30,7 +30,7 @@ struct ContentView: View {
                                 NavigationLink {
                                     TripView(trip: trip)
                                 } label: {
-                                    ExtractedView(trip: trip)
+                                    TripBox(trip: trip)
                                 }
                             }
                         } .onDelete(perform: deleteItems)
@@ -41,7 +41,7 @@ struct ContentView: View {
                                 NavigationLink {
                                     TripView(trip: trip)
                                 } label: {
-                                    ExtractedView(trip: trip)
+                                    TripBox(trip: trip)
                                 }
                             }
                         } .onDelete(perform: deleteItems)
@@ -52,7 +52,7 @@ struct ContentView: View {
                                 NavigationLink {
                                     TripView(trip: trip)
                                 } label: {
-                                    ExtractedView(trip: trip)
+                                    TripBox(trip: trip)
                                 }
                             }
                         } .onDelete(perform: deleteItems)
@@ -78,8 +78,6 @@ struct ContentView: View {
                 .listStyle(.grouped)
 
             }
-        } detail: {
-            Text("Select an item")
         }
     }
 
@@ -125,10 +123,11 @@ struct ContentView: View {
             }
         }
 
-        private func addItem() {
+    ///Add newly created Trip to modelContext and DB
+    private func addItem() {
             withAnimation {
-                let newItem = Trip(name: name, location: location, from: from, till: till)
-                modelContext.insert(newItem)
+                let newTrip = Trip(name: name, location: location, from: from, till: till, budget: budget)
+                modelContext.insert(newTrip)
             }
         }
     }
@@ -147,7 +146,7 @@ struct ContentView: View {
         .modelContainer(for: Trip.self, inMemory: true)
 }
 
-struct ExtractedView: View {
+struct TripBox: View {
     var trip: Trip
     var body: some View {
         HStack {

@@ -12,14 +12,17 @@ import SwiftData
 final class Event {
     var name: String
     var location: String
-    var from: Date
-    var till: Date
-    var price: Double?
+    var date: Date
+    var price: Double
+    var category: String
     
-    init(name: String, location: String, from: Date, till: Date) {
+    init(name: String, location: String, date: Date, price: Double, category: String) {
         self.name = name
         self.location = location
-        self.from = from
-        self.till = till
+        self.date = date
+        self.price = price
+        self.category = category
     }
+    
 }
+
