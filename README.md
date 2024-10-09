@@ -49,11 +49,11 @@ The app should:
 
 ## Analysis
 
-![UML](/images/UMLClassDiagram.png)
+![UML](/images/AOL.png)
 
 ## System Design
 
-![UML](/images/ComponentDiagram.png)
+![UML](/images/SystemDesign.png)
 
 
 ## Product Backlog
