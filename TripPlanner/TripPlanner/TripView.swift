@@ -7,47 +7,29 @@
 
 import SwiftUI
 import SwiftData
+import MapKit
+import Combine
 
 struct TripView: View {
     var trip: Trip
-    @State private var tab = 0
     
     var body: some View {
-        NavigationView {
-            VStack {
-                switch tab {
-                case 0:
-                    OverviewView(trip: trip)
-                case 1:
-                    ScheduleView(trip: trip)
-                case 2:
-                    BudgetView(trip: trip)
-                default:
-                    OverviewView(trip: trip)
+        TabView{
+            OverviewView(trip: trip)
+                .tabItem {
+                    Image(systemName: "info.circle")
+                    Text("Overview")
                 }
-                Spacer()
-                TabView(selection: $tab) {
-                    Text("")
-                        .tabItem {
-                            Label("Overview", systemImage: "airplane.departure")
-                        }
-                        .tag(0)
-                    
-                    Text("")
-                        .tabItem {
-                            Label("Schedule", systemImage: "list.bullet")
-                        }
-                        .tag(1)
-                    
-                    // Tab 3 - Budget
-                    Text("")
-                        .tabItem {
-                            Label("Budget", systemImage: "dollarsign.circle")
-                        }
-                        .tag(2)
+            ScheduleView(trip: trip)
+                .tabItem {
+                    Image(systemName: "timelapse")
+                    Text("Schedule")
                 }
-                .frame(height: 50)
-            }
+            BudgetView(trip: trip)
+                .tabItem {
+                    Image(systemName: "dollarsign")
+                    Text("Budget")
+                }
         }
     }
 }
@@ -128,3 +110,5 @@ struct BudgetView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 }
+
+
