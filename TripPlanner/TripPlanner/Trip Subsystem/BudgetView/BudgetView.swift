@@ -16,9 +16,22 @@ struct BudgetView: View {
     var body: some View {
         NavigationView {
             Form {
-                TotalBudgetSection(budget: $trip.budget)
-                UsedBudgetSection(usedAmount: trip.getUsedAmount())
-                BudgetLeftSection(usedAmount: trip.getUsedAmount(), totalBudget: trip.getBudget())
+                Section(header: Text("Total Budget")) {
+                    TextField("\(trip.budget)", value: $trip.budget, format: .currency(code: "EUR"))
+                        .submitLabel(.done)
+                }
+                Section(header: Text("Used Budget")) {
+                    Text(trip.getUsedAmount(), format: .currency(code: "EUR"))
+                }
+                Section(header: Text("Budget left")) {
+                    Text(trip.getBudget() - trip.getUsedAmount(), format: .currency(code: "EUR"))
+                        .foregroundColor(trip.getUsedAmount() > trip.getBudget() ? .red : .green)
+                    if trip.getBudget() > 0.0 {
+                        ProgressView(
+                            value: trip.getUsedAmount() <= trip.getBudget() ?
+                            trip.getUsedAmount() : trip.getBudget(), total: trip.getBudget())
+                    }
+                }
                 CategoriesSection(categories: categories)
                 DistributionSection(categories: categories)
             }
@@ -31,89 +44,6 @@ struct BudgetView: View {
     }
 }
 
-struct TotalBudgetSection: View {
-    @Binding var budget: Double
-    
-    var body: some View {
-        Section(header: Text("Total Budget")) {
-            TextField("\(budget)", value: $budget, format: .currency(code: "EUR"))
-                .textFieldStyle(.roundedBorder)
-                .submitLabel(.done)
-        }
-    }
-}
-
-struct UsedBudgetSection: View {
-    var usedAmount: Double
-    
-    var body: some View {
-        Section(header: Text("Used Budget")) {
-            Text(usedAmount, format: .currency(code: "EUR"))
-        }
-    }
-}
-
-struct BudgetLeftSection: View {
-    var usedAmount: Double
-    var totalBudget: Double
-    
-    var body: some View {
-        Section(header: Text("Budget left")) {
-            Text(totalBudget - usedAmount, format: .currency(code: "EUR"))
-                .foregroundColor(usedAmount > totalBudget ? .red : .green)
-            if totalBudget > 0.0 {
-                ProgressView(value: usedAmount <= totalBudget ? usedAmount : totalBudget, total: totalBudget)
-            }
-        }
-    }
-}
-
-struct CategoriesSection: View {
-    var categories: [Category]
-    
-    var body: some View {
-        Section(header: Text("Categories")) {
-            if categories.isEmpty {
-                Text("No Events yet")
-            } else {
-                List {
-                    ForEach(categories) { category in
-                        HStack {
-                            Circle()
-                                .fill(category.color)
-                                .frame(width: 10, height: 10)
-                            Text("\(category.title):")
-                            Text(category.amount, format: .currency(code: "EUR"))
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-struct DistributionSection: View {
-    var categories: [Category]
-    
-    var body: some View {
-        Section(header: Text("Distribution")) {
-            if categories.isEmpty {
-                Text("No Events yet")
-            } else {
-                Chart(categories) { category in
-                    SectorMark(
-                        angle: .value("Amount", category.amount),
-                        innerRadius: .ratio(0.6),
-                        angularInset: 8
-                    )
-                    .foregroundStyle(category.color)
-                }
-                .padding()
-                .frame(height: 300)
-            }
-        }
-    }
-}
 
 #Preview {
     BudgetView(trip: Trip(name: "Cool Trip", location: "Munich", from: Date(), till: Date(), budget: 100))

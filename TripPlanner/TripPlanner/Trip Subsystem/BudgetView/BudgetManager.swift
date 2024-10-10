@@ -8,7 +8,6 @@
 import Foundation
 import SwiftData
 
-@Model
 class BudgetManager {
     var trip: Trip
     var budget: Double
@@ -21,7 +20,7 @@ class BudgetManager {
     func getUsedAmount() -> Double {
         var used = 0.0
         for event in trip.events {
-            used += event.price
+            used += event.cost
         }
         return used
     }
@@ -29,7 +28,7 @@ class BudgetManager {
     func getUsedByCategory() -> [String: Double] {
         var usedByCategory: [String: Double] = [:]
         for event in trip.events {
-            usedByCategory[event.category, default: 0.0] += event.price
+            usedByCategory[event.category, default: 0.0] += event.cost
         }
         return usedByCategory
     }

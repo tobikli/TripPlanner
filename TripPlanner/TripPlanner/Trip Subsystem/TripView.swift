@@ -10,6 +10,8 @@ import SwiftData
 
 struct TripView: View {
     var trip: Trip
+    var modelContext: ModelContext
+
     
     var body: some View {
         TabView {
@@ -18,7 +20,7 @@ struct TripView: View {
                     Image(systemName: "house")
                     Text("Overview")
                 }
-            ScheduleView(trip: trip)
+            ScheduleView(trip: trip, modelContext: modelContext)
                 .tabItem {
                     Image(systemName: "list.bullet")
                     Text("Schedule")
@@ -30,9 +32,4 @@ struct TripView: View {
                 }
         }
     }
-}
-
-
-#Preview {
-    TripView(trip: Trip(name: "Cool Trip", location: "Munich", from: Date(), till: Date(), budget: 100))
 }

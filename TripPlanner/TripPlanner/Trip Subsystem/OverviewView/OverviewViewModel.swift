@@ -29,5 +29,4 @@ import SwiftData
             let tillDate = trip.till.formatted(.dateTime.month().day().year())
             return (fromDate, tillDate)
         }
-
 }

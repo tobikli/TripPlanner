@@ -7,26 +7,38 @@
 
 import Foundation
 import SwiftUI
+import SwiftData
 
 
-struct  TripSection: View {
-    var trips: [Trip]
-    let calendar = Calendar.current
+struct  TripSectionView: View {
     let deleteAction: (IndexSet) -> Void
+    let type: String
     
+    var modelContext: ModelContext
+
+    @State var viewModel: TripSectionViewModel
+    
+    init(trips: [Trip], deleteAction: @escaping (IndexSet) -> Void, type: String, mC: ModelContext) {
+        self.modelContext = mC
+        self.deleteAction = deleteAction
+        self.type = type
+        self._viewModel = State(
+            wrappedValue: TripSectionViewModel(trips: trips,
+                                               deleteAction: deleteAction,
+                                               type: type,
+                                               modelContext: modelContext))
+    }
+
     var body: some View {
-        Section(header: Text("Current Trips")) {
-            ForEach(trips) { trip in
-                if trip.from <= Date() &&
-                    (calendar.isDate(trip.till, inSameDayAs: Date()) || trip.till > Date()) {
+        Section(header: Text("\(viewModel.type) Trips")) {
+            ForEach(viewModel.getTrips()) { trip in
                     NavigationLink {
-                        TripView(trip: trip)
+                        TripView(trip: trip, modelContext: modelContext)
                     } label: {
                         TripBox(trip: trip)
                     }
-                }
             }
-            .onDelete(perform: deleteAction)
+            .onDelete(perform: viewModel.deleteAction)
         }
     }
 }
