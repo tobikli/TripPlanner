@@ -15,3 +15,6 @@ import SwiftUI
     var events: [Event] = []
     var budget: Double = 0.0
 }
+
+
+//TODO

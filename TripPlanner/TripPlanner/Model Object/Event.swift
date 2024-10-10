@@ -13,14 +13,14 @@ final class Event {
     var name: String
     var location: String
     var date: Date
-    var price: Double
+    var cost: Double
     var category: String
     
-    init(name: String, location: String, date: Date, price: Double, category: String) {
+    init(name: String, location: String, date: Date, cost: Double, category: String) {
         self.name = name
         self.location = location
         self.date = date
-        self.price = price
+        self.cost = cost
         self.category = category
     }
 }

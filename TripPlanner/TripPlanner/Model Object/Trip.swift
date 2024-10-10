@@ -29,7 +29,7 @@ final class Trip {
     func getUsedAmount() -> Double {
         var used = 0.0
         for event in events {
-            used += event.price
+            used += event.cost
         }
         return used
     }
@@ -41,13 +41,13 @@ final class Trip {
             if let existingCategory = categoriesDict[event.category] {
                 let updatedCategory = Category(
                     title: existingCategory.title,
-                    amount: existingCategory.amount + event.price,
-                    color: matchColor(category: event.category))
+                    amount: existingCategory.amount + event.cost,
+                    color: existingCategory.color)
                 categoriesDict[event.category] = updatedCategory
             } else {
                 let newCategory = Category(
                     title: event.category,
-                    amount: event.price,
+                    amount: event.cost,
                     color: matchColor(category: event.category))
                 categoriesDict[event.category] = newCategory
             }

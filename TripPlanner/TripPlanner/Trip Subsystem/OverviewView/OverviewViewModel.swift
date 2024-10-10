@@ -8,8 +8,7 @@
 import Foundation
 import SwiftData
 
-@Observable
-class OverviewViewModel: ObservableObject {
+@Observable class OverviewViewModel: ObservableObject {
     var trip: Trip
     
     var weatherIcon: String = "cloud.sun.fill"
@@ -26,8 +25,9 @@ class OverviewViewModel: ObservableObject {
     }
     
     func formattedTripDates() -> (from: String, till: String) {
-        let fromDate = trip.from.formatted(.dateTime.month().day().year())
-        let tillDate = trip.till.formatted(.dateTime.month().day().year())
-        return (fromDate, tillDate)
-    }
+            let fromDate = trip.from.formatted(.dateTime.month().day().year())
+            let tillDate = trip.till.formatted(.dateTime.month().day().year())
+            return (fromDate, tillDate)
+        }
+
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 
-struct ContentView: View {
+struct HomeView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var trips: [Trip]
     @State private var showingAddItemView = false
@@ -114,7 +114,7 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    HomeView()
         .modelContainer(for: Trip.self, inMemory: true)
 }
 
