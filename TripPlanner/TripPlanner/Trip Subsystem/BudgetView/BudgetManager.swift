@@ -10,7 +10,7 @@ import SwiftData
 
 @Model
 class BudgetManager {
-    let trip: Trip
+    var trip: Trip
     var budget: Double
     
     init(trip: Trip, budget: Double) {

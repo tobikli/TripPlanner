@@ -80,7 +80,7 @@ struct AddItemView: View {
     @State private var category: String = "Flight"
     
     var trip: Trip
-    @Binding var events: [Event] 
+    @Binding var events: [Event]
     
     var body: some View {
             NavigationView {

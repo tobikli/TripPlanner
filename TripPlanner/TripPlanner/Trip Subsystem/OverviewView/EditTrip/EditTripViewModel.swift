@@ -10,10 +10,8 @@ import SwiftUI
 @Observable class EditTripViewModel {
     var name: String = ""
     var location: String = ""
-    var from: Date = Date()
-    var till: Date = Date()
+    var from = Date()
+    var till = Date()
     var events: [Event] = []
     var budget: Double = 0.0
-    
-    
 }
