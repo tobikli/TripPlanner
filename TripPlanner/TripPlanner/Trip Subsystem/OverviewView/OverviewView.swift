@@ -8,15 +8,15 @@ import SwiftUI
 import SwiftData
 
 struct OverviewView: View {
-    @ObservedObject var overviewViewModel: OverviewViewModel
+    @State var overviewViewModel: OverviewViewModel
     @State private var showingAddItemView = false
 
     var body: some View {
         NavigationView {
             Form {
                 TripInformationSection(trip: overviewViewModel.trip)
-                DatesSection(from: overviewViewModel.formattedTripDates().from,
-                             till: overviewViewModel.formattedTripDates().till)
+                DatesSection(from: overviewViewModel.trip.from.formatted(),
+                             till: overviewViewModel.trip.till.formatted())
                 WeatherSection(validWeather: overviewViewModel.validWeather,
                                location: overviewViewModel.trip.location,
                                weatherIcon: overviewViewModel.weatherIcon,

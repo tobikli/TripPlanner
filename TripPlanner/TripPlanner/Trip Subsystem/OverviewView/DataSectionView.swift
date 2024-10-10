@@ -21,7 +21,7 @@ struct DatesSection: View {
             }
             
             HStack {
-                Text("Till:")
+                Text("Until:")
                 Spacer()
                 Text(till)
             }

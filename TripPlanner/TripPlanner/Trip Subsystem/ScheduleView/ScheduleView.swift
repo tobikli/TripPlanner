@@ -41,18 +41,6 @@ struct ScheduleView: View {
                     .listStyle(.insetGrouped)
                 }
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: {
-                        showingAddItemView.toggle()
-                    }) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
             .navigationBarTitle("Schedule", displayMode: .inline)
             .sheet(isPresented: $showingAddItemView) {
                 AddEventView(modelContext: modelContext, trip: trip)
@@ -84,11 +72,11 @@ struct EventBox: View {
 
 func getIconName(category: String) -> String {
     switch category {
-    case "Flight": return "airplane"
-    case "Accommodation": return "house"
-    case "Transportation": return "tram"
-    case "Food": return "fork.knife"
-    case "Activity": return "figure.run"
-    default: return "questionmark.circle"
+    case "Flight": "airplane"
+    case "Accommodation": "house"
+    case "Transportation": "tram"
+    case "Food": "fork.knife"
+    case "Activity": "figure.run"
+    default: "questionmark.circle"
     }
 }

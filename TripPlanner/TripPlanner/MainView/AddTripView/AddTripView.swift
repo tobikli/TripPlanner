@@ -29,7 +29,7 @@ struct AddTripView: View {
                 }
                 Section(header: Text("Time")) {
                     DatePicker("From", selection: $viewModel.from, displayedComponents: .date)
-                    DatePicker("Till", selection: $viewModel.till, displayedComponents: .date)
+                    DatePicker("Until", selection: $viewModel.till, displayedComponents: .date)
                 }
                 Section(header: Text("Budget")) {
                     TextField("Initial Budget",
