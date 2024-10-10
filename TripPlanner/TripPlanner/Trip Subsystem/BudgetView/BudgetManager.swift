@@ -37,6 +37,4 @@ class BudgetManager {
     func getBudget() -> Double {
         return budget
     }
-    
-    
 }

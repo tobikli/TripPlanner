@@ -15,80 +15,52 @@ struct ContentView: View {
     let calendar = Calendar.current
 
     var body: some View {
-        NavigationView {
-            VStack {
-                if trips.isEmpty {
-                    Spacer()
-                    Text("No Trips yet")
-                        .font(.headline)
-                        .fontWeight(.light)
-                    .padding(.top)}
-                List {
-                    Section(header: Text("Current Trips")) {
-                        ForEach(trips) { trip in
-                            if trip.from <= Date() && (calendar.isDate(trip.till, inSameDayAs: Date()) || trip.till > Date()) {
-                                NavigationLink {
-                                    TripView(trip: trip)
-                                } label: {
-                                    TripBox(trip: trip)
-                                }
-                            }
-                        } .onDelete(perform: deleteItems)
+            NavigationView {
+                VStack {
+                    if trips.isEmpty {
+                        Spacer()
+                        Text("No Trips yet")
+                            .font(.headline)
+                            .fontWeight(.light)
+                            .padding(.top)
                     }
-                    Section(header: Text("Future Trips")) {
-                        ForEach(trips) { trip in
-                            if trip.from > Date() {
-                                NavigationLink {
-                                    TripView(trip: trip)
-                                } label: {
-                                    TripBox(trip: trip)
-                                }
-                            }
-                        } .onDelete(perform: deleteItems)
+                    List {
+                        CurrentTripsSection(trips: trips, deleteAction: deleteItems)
+                        FutureTripsSection(trips: trips, deleteAction: deleteItems)
+                        PastTripsSection(trips: trips, deleteAction: deleteItems)
                     }
-                    Section(header: Text("Past Trips")) {
-                        ForEach(trips) { trip in
-                            if trip.till < Date() && !calendar.isDate(trip.till, inSameDayAs: Date())  {
-                                NavigationLink {
-                                    TripView(trip: trip)
-                                } label: {
-                                    TripBox(trip: trip)
-                                }
-                            }
-                        } .onDelete(perform: deleteItems)
-                    }
-                }
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        EditButton()
-                    }
-                    ToolbarItem {
-                        Button(action: {
-                            showingAddItemView.toggle()
+                    .listStyle(.sidebar)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            EditButton()
                         }
-                        ) {
-                            Label("Add Item", systemImage: "plus")
+                        ToolbarItem {
+                            Button(action: {
+                                showingAddItemView.toggle()
+                            }) {
+                                Label("Add Item", systemImage: "plus")
+                            }
                         }
                     }
+                    .navigationTitle(Text("TripPlanner"))
+                    .sheet(isPresented: $showingAddItemView) {
+                        AddItemView()
+                    }
+                    .listStyle(.grouped)
                 }
-                .navigationTitle(Text("TripPlanner"))
-                .sheet(isPresented: $showingAddItemView) {
-                                    AddItemView()
-                                }
-                .listStyle(.grouped)
-
             }
         }
-    }
 
     struct AddItemView: View {
         @Environment(\.dismiss) private var dismiss
         @Environment(\.modelContext) private var modelContext
+        
+        @FocusState var isInputActive: Bool
 
         @State private var name: String = "My Awesome Trip"
         @State private var location: String = ""
-        @State private var from: Date = Date()
-        @State private var till: Date = Date()
+        @State private var from = Date()
+        @State private var till = Date()
         @State private var budget: Double = 0.0
         
         var body: some View {
@@ -103,7 +75,7 @@ struct ContentView: View {
                         DatePicker("Till", selection: $till, displayedComponents: .date)
                     }
                     Section(header: Text("Budget")) {
-                        TextField("Initial Budget", value: $budget, format: .currency(code: "EUR")).keyboardType(.decimalPad)
+                        TextField("Initial Budget", value: $budget, format: .currency(code: "EUR")).submitLabel(.done)
                     }
                 }
                 .navigationTitle("Create New Trip")
@@ -146,10 +118,74 @@ struct ContentView: View {
         .modelContainer(for: Trip.self, inMemory: true)
 }
 
+struct CurrentTripsSection: View {
+    var trips: [Trip]
+    let calendar = Calendar.current
+    let deleteAction: (IndexSet) -> Void
+    
+    var body: some View {
+        Section(header: Text("Current Trips")) {
+            ForEach(trips) { trip in
+                if trip.from <= Date() &&
+                    (calendar.isDate(trip.till, inSameDayAs: Date()) || trip.till > Date()) {
+                    NavigationLink {
+                        TripView(trip: trip)
+                    } label: {
+                        TripBox(trip: trip)
+                    }
+                }
+            }
+            .onDelete(perform: deleteAction)
+        }
+    }
+}
+
+struct FutureTripsSection: View {
+    var trips: [Trip]
+    let deleteAction: (IndexSet) -> Void
+    
+    var body: some View {
+        Section(header: Text("Future Trips")) {
+            ForEach(trips) { trip in
+                if trip.from > Date() {
+                    NavigationLink {
+                        TripView(trip: trip)
+                    } label: {
+                        TripBox(trip: trip)
+                    }
+                }
+            }
+            .onDelete(perform: deleteAction)
+        }
+    }
+}
+
+struct PastTripsSection: View {
+    var trips: [Trip]
+    let calendar = Calendar.current
+    let deleteAction: (IndexSet) -> Void
+    
+    var body: some View {
+        Section(header: Text("Past Trips")) {
+            ForEach(trips) { trip in
+                if trip.till < Date() && !calendar.isDate(trip.till, inSameDayAs: Date()) {
+                    NavigationLink {
+                        TripView(trip: trip)
+                    } label: {
+                        TripBox(trip: trip)
+                    }
+                }
+            }
+            .onDelete(perform: deleteAction)
+        }
+    }
+}
+
 struct TripBox: View {
     var trip: Trip
     var body: some View {
         HStack {
+            Image(systemName: "airplane")
             VStack(alignment: .leading) {
                 Text(trip.name)
                     .font(.headline)
@@ -160,11 +196,27 @@ struct TripBox: View {
             }
             .padding(.vertical, 4)
             Spacer()
-                HStack(alignment: .center) {
-                    Text(trip.from, format: Date.FormatStyle(date: .abbreviated, time: .omitted)).fontWeight(.light).font(.system(size: 12))
-                    Text("-")
-                    Text(trip.till, format: Date.FormatStyle(date: .abbreviated, time: .omitted)).fontWeight(.light).font(.system(size: 12))
+                   
+                VStack(alignment: .center) {
+                    Text(trip.from, format: Date.FormatStyle()
+                        .day(.twoDigits)
+                        .month(.abbreviated))
+                    .fontWeight(.light)
+                    .font(.system(size: 12))
+                        .padding(.bottom, 2)
+                    Text(trip.till, format: Date.FormatStyle()
+                        .day(.twoDigits)
+                        .month(.abbreviated))
+                    .fontWeight(.light)
+                    .font(.system(size: 12))
                 }
+                .padding(10)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 2)
+                        .stroke(.primary, lineWidth: 0.5)
+                )
+            Spacer()
+                .frame(maxWidth: 20)
         }
     }
 }

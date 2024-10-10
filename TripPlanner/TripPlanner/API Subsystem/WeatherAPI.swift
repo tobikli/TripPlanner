@@ -7,11 +7,11 @@
 
 import Foundation
 
+/*
 class WeatherAPI {
     ///Weather apiKey and URL for fetching Weather Data based on Location
     private let apiKey: String = ""
     private let baseURL: String = ""
-    
     
     
     func fetchWeatherCaller(for location: String) {
@@ -27,5 +27,5 @@ class WeatherAPI {
         }
         return ("Test", "Test", true)
     }
-    
 }
+*/

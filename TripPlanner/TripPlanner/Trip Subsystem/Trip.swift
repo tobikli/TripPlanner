@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import SwiftUI
 
 @Model
 final class Trip {
@@ -38,10 +39,16 @@ final class Trip {
         
         for event in events {
             if let existingCategory = categoriesDict[event.category] {
-                let updatedCategory = Category(title: existingCategory.title, amount: existingCategory.amount + event.price)
+                let updatedCategory = Category(
+                    title: existingCategory.title,
+                    amount: existingCategory.amount + event.price,
+                    color: matchColor(category: event.category))
                 categoriesDict[event.category] = updatedCategory
             } else {
-                let newCategory = Category(title: event.category, amount: event.price)
+                let newCategory = Category(
+                    title: event.category,
+                    amount: event.price,
+                    color: matchColor(category: event.category))
                 categoriesDict[event.category] = newCategory
             }
         }
@@ -52,10 +59,22 @@ final class Trip {
     func getBudget() -> Double {
         return budget
     }
+    
+    func matchColor(category: String) -> Color {
+        switch category {
+        case "Flight": return .red
+        case "Accommodation": return .blue
+        case "Transportation": return .green
+        case "Food": return .yellow
+        case "Activity": return .purple
+        default: return .black
+        }
+    }
 }
 
 struct Category: Identifiable {
     let id = UUID()
     let title: String
     let amount: Double
+    let color: Color
 }

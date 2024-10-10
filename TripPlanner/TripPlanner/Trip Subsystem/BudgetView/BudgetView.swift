@@ -9,48 +9,108 @@ import SwiftData
 import Charts
 
 struct BudgetView: View {
-    var trip: Trip
+    @Bindable var trip: Trip
     @State private var categories: [Category] = []
-    
+    @FocusState var isInputActive: Bool
+
     var body: some View {
-        Form {
-            Section(header: Text("Total Budget")){
-                Text(trip.getBudget(), format: .currency(code: "EUR"))
+        NavigationView {
+            Form {
+                TotalBudgetSection(budget: $trip.budget)
+                UsedBudgetSection(usedAmount: trip.getUsedAmount())
+                BudgetLeftSection(usedAmount: trip.getUsedAmount(), totalBudget: trip.getBudget())
+                CategoriesSection(categories: categories)
+                DistributionSection(categories: categories)
             }
-            Section(header: Text("Used Budget")){
-                Text(trip.getUsedAmount(), format: .currency(code: "EUR"))
-            }
-            Section(header: Text("Budget left")){
-                Text(trip.getBudget() - trip.getUsedAmount(), format: .currency(code: "EUR"))
-                    .foregroundColor(trip.getUsedAmount() > trip.getBudget() ? .red : .green)
-            }
-            Section(header: Text("Distribution")){
-                ProgressView(value: trip.getUsedAmount(), total: trip.getBudget())
-                Chart(categories) { category in
-                    SectorMark(
-                                    angle: .value(
-                                        Text(verbatim: category.title),
-                                        category.amount
-                                    ),
-                                    innerRadius: .ratio(0.6),
-                                    angularInset: 8
-                                )
-                                .foregroundStyle(
-                                    by: .value(
-                                        Text(verbatim: category.title),
-                                        category.amount
-                                    )
-                                )
-                }.padding()
-                    .scaledToFit()
-                    .chartLegend(.visible)
-                    .chartLegend(alignment: .center)
+            .navigationBarTitle("Budget")
+            .navigationBarTitleDisplayMode(.inline)
+            .onAppear {
+                categories = trip.getUsedByCategory()
             }
         }
-        .navigationTitle("Budget")
-        .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            categories = trip.getUsedByCategory()
+    }
+}
+
+struct TotalBudgetSection: View {
+    @Binding var budget: Double
+    
+    var body: some View {
+        Section(header: Text("Total Budget")) {
+            TextField("\(budget)", value: $budget, format: .currency(code: "EUR"))
+                .textFieldStyle(.roundedBorder)
+                .submitLabel(.done)
+        }
+    }
+}
+
+struct UsedBudgetSection: View {
+    var usedAmount: Double
+    
+    var body: some View {
+        Section(header: Text("Used Budget")) {
+            Text(usedAmount, format: .currency(code: "EUR"))
+        }
+    }
+}
+
+struct BudgetLeftSection: View {
+    var usedAmount: Double
+    var totalBudget: Double
+    
+    var body: some View {
+        Section(header: Text("Budget left")) {
+            Text(totalBudget - usedAmount, format: .currency(code: "EUR"))
+                .foregroundColor(usedAmount > totalBudget ? .red : .green)
+            if totalBudget > 0.0 {
+                ProgressView(value: usedAmount <= totalBudget ? usedAmount : totalBudget, total: totalBudget)
+            }
+        }
+    }
+}
+
+struct CategoriesSection: View {
+    var categories: [Category]
+    
+    var body: some View {
+        Section(header: Text("Categories")) {
+            if categories.isEmpty {
+                Text("No Events yet")
+            } else {
+                List {
+                    ForEach(categories) { category in
+                        HStack {
+                            Circle()
+                                .fill(category.color)
+                                .frame(width: 10, height: 10)
+                            Text("\(category.title):")
+                            Text(category.amount, format: .currency(code: "EUR"))
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct DistributionSection: View {
+    var categories: [Category]
+    
+    var body: some View {
+        Section(header: Text("Distribution")) {
+            if categories.isEmpty {
+                Text("No Events yet")
+            } else {
+                Chart(categories) { category in
+                    SectorMark(
+                        angle: .value("Amount", category.amount),
+                        innerRadius: .ratio(0.6),
+                        angularInset: 8
+                    )
+                    .foregroundStyle(category.color)
+                }
+                .padding()
+                .frame(height: 300)
+            }
         }
     }
 }
@@ -58,4 +118,3 @@ struct BudgetView: View {
 #Preview {
     BudgetView(trip: Trip(name: "Cool Trip", location: "Munich", from: Date(), till: Date(), budget: 100))
 }
-

@@ -12,7 +12,7 @@ struct TripView: View {
     var trip: Trip
     
     var body: some View {
-        TabView{
+        TabView {
             OverviewView(overviewViewModel: OverviewViewModel(trip: trip))
                 .tabItem {
                     Image(systemName: "house")
@@ -36,7 +36,3 @@ struct TripView: View {
 #Preview {
     TripView(trip: Trip(name: "Cool Trip", location: "Munich", from: Date(), till: Date(), budget: 100))
 }
-
-
-
-

@@ -23,6 +23,4 @@ final class Event {
         self.price = price
         self.category = category
     }
-    
 }
-

@@ -13,7 +13,7 @@ struct ScheduleView: View {
             VStack {
                 Button(action: {
                     showingAddItemView.toggle()
-                }){
+                }) {
                     Label("Add Event", systemImage: "plus")
                 }
                 if events.isEmpty {
@@ -52,7 +52,7 @@ struct ScheduleView: View {
             .navigationBarTitle("Schedule", displayMode: .inline)
             .sheet(isPresented: $showingAddItemView) {
                 AddItemView(trip: trip, events: $events)
-        }
+            }
         .onAppear {
             events = trip.events
         }
@@ -75,57 +75,37 @@ struct AddItemView: View {
     
     @State private var name: String = ""
     @State private var location: String = ""
-    @State private var date: Date = Date()
+    @State private var date = Date()
     @State private var price: Double = 0.0
     @State private var category: String = "Flight"
     
     var trip: Trip
-    @Binding var events: [Event]  // Bind to the parent view's state
+    @Binding var events: [Event] 
     
     var body: some View {
-        NavigationView {
-            Form {
-                
-                    Picker(
-                        "Event Category",
-                        selection: $category
-                    ){
-                        Text("Flight").tag("Flight")
-                        Text("Accommodation").tag("Accommodation")
-                        Text("Transportation").tag("Transportation")
-                        Text("Food").tag("Food")
-                        Text("Activity").tag("Activity")
+            NavigationView {
+                Form {
+                    CategoryPicker(category: $category)
+                    InformationSection(name: $name, location: $location)
+                    TimeSection(date: $date)
+                    PriceSection(price: $price)
+                }
+                .navigationTitle("Create New Event")
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Cancel") {
+                            dismiss()
+                        }
                     }
-                    .pickerStyle(.inline)
-                
-                
-                Section(header: Text("Information")) {
-                    TextField("Event Name", text: $name)
-                    TextField("Location", text: $location)
-                }
-                Section(header: Text("Time")) {
-                    DatePicker("Date", selection: $date, displayedComponents: .date)
-                }
-                Section(header: Text("Price")) {
-                    TextField("Price", value: $price, format: .currency(code: "EUR")).keyboardType(.decimalPad)
-                }
-            }
-            .navigationTitle("Create New Event")
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
-                }
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Create") {
-                        addItem()
-                        dismiss()
+                    ToolbarItem(placement: .confirmationAction) {
+                        Button("Create") {
+                            addItem()
+                            dismiss()
+                        }
                     }
                 }
             }
         }
-    }
     
     private func addItem() {
         withAnimation {
@@ -134,6 +114,54 @@ struct AddItemView: View {
             
             trip.events.append(newItem)
             events.append(newItem)  // Update the state-bound array
+        }
+    }
+}
+
+struct CategoryPicker: View {
+    @Binding var category: String
+    
+    var body: some View {
+        Picker("Event Category", selection: $category) {
+            Text("Flight").tag("Flight")
+            Text("Accommodation").tag("Accommodation")
+            Text("Transportation").tag("Transportation")
+            Text("Food").tag("Food")
+            Text("Activity").tag("Activity")
+        }
+        .pickerStyle(.inline)
+    }
+}
+
+struct InformationSection: View {
+    @Binding var name: String
+    @Binding var location: String
+    
+    var body: some View {
+        Section(header: Text("Information")) {
+            TextField("Event Name", text: $name)
+            TextField("Location", text: $location)
+        }
+    }
+}
+
+struct TimeSection: View {
+    @Binding var date: Date
+    
+    var body: some View {
+        Section(header: Text("Time")) {
+            DatePicker("Date", selection: $date, displayedComponents: .date)
+        }
+    }
+}
+
+struct PriceSection: View {
+    @Binding var price: Double
+    
+    var body: some View {
+        Section(header: Text("Price")) {
+            TextField("Price", value: $price, format: .currency(code: "EUR"))
+                .keyboardType(.decimalPad)
         }
     }
 }
@@ -160,7 +188,7 @@ struct EventBox: View {
 
 func getIconName(category: String) -> String {
     switch category {
-    case"Flight": return "airplane"
+    case "Flight": return "airplane"
     case "Accommodation": return "house"
     case "Transportation": return "tram"
     case "Food": return "fork.knife"
