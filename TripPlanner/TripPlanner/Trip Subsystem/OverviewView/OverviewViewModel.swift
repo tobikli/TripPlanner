@@ -23,5 +23,4 @@ import SwiftData
     func requestWeather() {
         //let response = WeatherAPI().fetchWeatherCaller(for: trip.location)
     }
-    
 }
