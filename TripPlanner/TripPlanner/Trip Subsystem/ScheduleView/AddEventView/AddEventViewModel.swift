@@ -18,6 +18,7 @@ import SwiftData
     var date = Date()
     var cost: Double = 0.0
     var category: String = "Flight"
+    var flightNumber: String?
     
     var trip: Trip
     

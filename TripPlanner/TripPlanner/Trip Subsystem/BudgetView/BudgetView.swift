@@ -12,13 +12,16 @@ struct BudgetView: View {
     @Bindable var trip: Trip
     @State private var categories: [Category] = []
     @FocusState var isInputActive: Bool
-
+    
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("Total Budget")) {
-                    TextField("\(trip.budget)", value: $trip.budget, format: .currency(code: "EUR"))
-                        .submitLabel(.done)
+                    ZStack(alignment: .trailing) {
+                        TextField("Enter budget", value: $trip.budget, format: .currency(code: "EUR"))
+                        Image(systemName: "pencil")
+                            .foregroundColor(.blue)
+                    }
                 }
                 Section(header: Text("Used Budget")) {
                     Text(trip.getUsedAmount(), format: .currency(code: "EUR"))

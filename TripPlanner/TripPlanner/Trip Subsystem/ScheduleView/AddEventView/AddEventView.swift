@@ -28,6 +28,14 @@ struct AddEventView: View {
             NavigationView {
                 Form {
                     CategoryPicker(category: $viewModel.category)
+                    if viewModel.category == "Flight" {
+                        Section(header: Text("Flight Information")) {
+                            TextField("Flight Number", text: Binding(
+                                get: { viewModel.flightNumber ?? "" },
+                                set: { viewModel.flightNumber = $0.isEmpty ? nil : $0 }
+                            ))
+                        }
+                    }
                     InformationSection(name: $viewModel.name, location: $viewModel.location)
                     TimeSection(date: $viewModel.date)
                     PriceSection(cost: $viewModel.cost)
@@ -82,7 +90,7 @@ struct AddEventView: View {
         
         var body: some View {
             Section(header: Text("Time")) {
-                DatePicker("Date", selection: $date, displayedComponents: .date)
+                DatePicker("Date", selection: $date)
             }
         }
     }

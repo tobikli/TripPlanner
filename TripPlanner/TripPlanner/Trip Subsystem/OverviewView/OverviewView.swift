@@ -6,6 +6,7 @@
 //
 import SwiftUI
 import SwiftData
+import MapKit
 
 struct OverviewView: View {
     @State var overviewViewModel: OverviewViewModel
@@ -38,5 +39,5 @@ struct OverviewView: View {
 #Preview {
     OverviewView(
         overviewViewModel: OverviewViewModel(
-            trip: Trip(name: "Cool Trip", location: "Munich", from: Date(), till: Date(), budget: 100)))
+            trip: Trip(name: "Cool Trip", location: "Dortmund", from: Date(), till: Date(), budget: 100)))
 }

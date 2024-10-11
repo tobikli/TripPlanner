@@ -30,6 +30,11 @@ struct TripView: View {
                     Image(systemName: "dollarsign")
                     Text("Budget")
                 }
+            MapView(mapViewModel: MapViewModel(trip: trip))
+                .tabItem {
+                    Image(systemName: "map")
+                    Text("Map")
+                }
         }
     }
 }
