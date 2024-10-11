@@ -19,8 +19,9 @@ struct WeatherSection: View {
                 if validWeather {
                     Spacer()
                     Text("The weather currently in \(location)")
-                        .font(.custom("MediteraRounded-RegularDemo", size: 18))
+                        .font(.custom("MediteraRounded-RegularDemo", size: 22))
                         .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(.vertical, 2)
                     Spacer()
                     HStack {
                         Image(systemName: weatherIcon)

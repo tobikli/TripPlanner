@@ -12,11 +12,11 @@ import AlertToast
 struct HomeView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var trips: [Trip]
-    @State private var showingAddItemView = false
+    @State private var showingAddTripView = false
     @State private var showToast = false
     
     var body: some View {
-            NavigationView {
+            NavigationStack {
                 VStack {
                     if trips.isEmpty {
                         Spacer()
@@ -37,23 +37,21 @@ struct HomeView: View {
                         }
                         ToolbarItem {
                             Button(action: {
-                                showingAddItemView.toggle()
+                                showingAddTripView.toggle()
                             }) {
-                                Label("Add Item", systemImage: "plus")
+                                Label("Add Trip", systemImage: "plus")
                             }
                         }
                     }
                     .navigationTitle(Text("TripPlanner"))
-                    .sheet(isPresented: $showingAddItemView) {
+                    .sheet(isPresented: $showingAddTripView) {
                         AddTripView(modelContext: modelContext, showAlert: $showToast)
                     }
                     .listStyle(.grouped)
+                    .toast(isPresenting: $showToast) {
+                        AlertToast(displayMode: .banner(.slide), type: .complete(.primary), title: "Created new Trip")
+                    }
                 }
-            }.toast(isPresenting: $showToast, duration: 3) {
-                AlertToast(displayMode: .banner(.pop),
-                           type: .complete(.primary),
-                           title: "Created new Trip",
-                           subTitle: "Your trip has been created successfully")
             }
         }
     

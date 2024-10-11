@@ -6,12 +6,13 @@
 //
 import SwiftUI
 import SwiftData
-import MapKit
+import AlertToast
 
 struct OverviewView: View {
     @State var overviewViewModel: OverviewViewModel
     @State private var editMode = false
-
+    @State private var showAlert = false
+    
     var body: some View {
         NavigationView {
             Form {
@@ -22,21 +23,23 @@ struct OverviewView: View {
                                weatherIcon: overviewViewModel.weatherIcon,
                                temperature: overviewViewModel.temperature)
                 ComingUpSection(viewModel: overviewViewModel)
-                
-                Button(action: {
-                    editMode.toggle()
-                }) {
-                    editMode ? Label("Done", systemImage: "checkmark") : Label("Edit Trip", systemImage: "pencil")
-                }
             }
             .navigationTitle(overviewViewModel.trip.name)
             .navigationBarTitleDisplayMode(.automatic)
+            .toast(isPresenting: $showAlert, duration: 1.5) {
+                AlertToast(type: .complete(.primary),
+                           title: "Saved Trip")
+            }
+            .navigationBarItems(
+                trailing: Button(action: {
+                    if editMode {
+                        showAlert.toggle()
+                    }
+                    editMode.toggle()
+                }) {
+                    editMode ? Label("Done", systemImage: "checkmark") : Label("Edit", systemImage: "pencil")
+                }
+            )
         }
     }
-}
-
-#Preview {
-    OverviewView(
-        overviewViewModel: OverviewViewModel(
-            trip: Trip(name: "Cool Trip", location: "Dortmund", from: Date(), till: Date(), budget: 100)))
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 
-@Observable class TripSectionViewModel : ObservableObject {
+@Observable class TripSectionViewModel {
     let type: String
     let calendar = Calendar.current
     var modelContext: ModelContext
@@ -34,7 +34,9 @@ import SwiftData
     func getTrips() -> [Trip] {
         switch type {
         case "Current":
-            return fetchTrips().filter { trip in calendar.isDate(trip.till, inSameDayAs: Date()) || trip.till > Date() }
+            return fetchTrips().filter { trip in
+                calendar.isDate(trip.till, inSameDayAs: Date()) || (trip.till > Date() && trip.from <= Date())
+            }
         case "Future":
             return fetchTrips().filter { trip in trip.from > Date() }
         case "Past":

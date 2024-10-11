@@ -24,7 +24,7 @@ struct AddTripView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section(header: Text("Information")) {
                     TextField("Trip Name", text: $viewModel.name)
@@ -49,7 +49,7 @@ struct AddTripView: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Create") {
-                        viewModel.addItem()
+                        viewModel.addTrip()
                         showAlert.toggle()
                         dismiss()
                     }

@@ -15,12 +15,14 @@ final class Event {
     var date: Date
     var cost: Double
     var category: String
+    var flightNumber: String?
     
-    init(name: String, location: String, date: Date, cost: Double, category: String) {
+    init(name: String, location: String, date: Date, cost: Double, category: String, flightNumber: String?) {
         self.name = name
         self.location = location
         self.date = date
         self.cost = cost
         self.category = category
+        self.flightNumber = flightNumber
     }
 }

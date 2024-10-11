@@ -1,10 +1,13 @@
 import SwiftUI
 import SwiftData
+import AlertToast
 
 struct ScheduleView: View {
     @State private var trip: Trip
     
     @State private var showingAddItemView = false
+    
+    @State private var showAlert = false
     
     var modelContext: ModelContext
     
@@ -19,7 +22,7 @@ struct ScheduleView: View {
                     showingAddItemView.toggle()
                 }) {
                     Label("Add Event", systemImage: "plus")
-                }
+                }.padding(.vertical, 2)
                 if trip.events.isEmpty {
                     Text("No Events yet")
                         .font(.headline)
@@ -38,12 +41,18 @@ struct ScheduleView: View {
                             .onDelete(perform: deleteItems)
                         }
                     }
-                    .listStyle(.grouped)
+                    .listStyle(.plain)
                 }
             }
             .navigationBarTitle("Schedule", displayMode: .inline)
             .sheet(isPresented: $showingAddItemView) {
-                AddEventView(modelContext: modelContext, trip: trip)
+                AddEventView(modelContext: modelContext, trip: trip, showAlert: $showAlert)
+            }
+            .toast(isPresenting: $showAlert, duration: 3) {
+                AlertToast(displayMode: .banner(.slide),
+                           type: .complete(.primary),
+                           title: "Created new Event for \(trip.name)",
+                           subTitle: "Your Event has been created successfully")
             }
     }
 
@@ -64,6 +73,7 @@ struct EventBox: View {
     var body: some View {
         HStack {
             Image(systemName: "arrow.down")
+            Spacer()
             Image(systemName: getIconName(category: event.category))
             Spacer()
             VStack {

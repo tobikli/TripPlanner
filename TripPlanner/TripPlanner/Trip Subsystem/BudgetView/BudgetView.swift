@@ -14,7 +14,7 @@ struct BudgetView: View {
     @FocusState var isInputActive: Bool
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section(header: Text("Total Budget")) {
                     ZStack(alignment: .trailing) {

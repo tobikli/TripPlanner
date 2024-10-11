@@ -21,7 +21,7 @@ import SwiftData
     var till = Date()
     var budget: Double = 0.0
     
-    func addItem() {
+    func addTrip() {
         withAnimation {
             let newTrip = Trip(name: name, location: location, from: from, till: till, budget: budget)
             modelContext.insert(newTrip)

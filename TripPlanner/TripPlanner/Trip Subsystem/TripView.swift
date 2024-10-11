@@ -11,7 +11,6 @@ import SwiftData
 struct TripView: View {
     var trip: Trip
     var modelContext: ModelContext
-
     
     var body: some View {
         TabView {

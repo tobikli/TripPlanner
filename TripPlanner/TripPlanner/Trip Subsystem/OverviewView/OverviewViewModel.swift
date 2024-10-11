@@ -24,16 +24,8 @@ import os
         self.trip = trip
         self.logger = Logger()
         Task {
-            await requestLocation()
             await requestWeather()
         }
-    }
-    
-    func requestLocation() async {
-        let weatherAPI = WeatherAPI(location: trip.location)
-        let (lat, long) = await weatherAPI.getLocation()  // Await temperature data
-        latitude = lat
-        longitude = long
     }
     
     func requestWeather() async {

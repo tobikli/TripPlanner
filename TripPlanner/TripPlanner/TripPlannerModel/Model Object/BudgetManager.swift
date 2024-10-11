@@ -8,6 +8,7 @@
 import Foundation
 import SwiftData
 
+@Model
 class BudgetManager {
     var trip: Trip
     var budget: Double

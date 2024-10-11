@@ -22,10 +22,19 @@ struct DistributionSection: View {
                         innerRadius: .ratio(0.6),
                         angularInset: 8
                     )
+                    .annotation(position: .overlay) {
+                        Text(category.amount, format: .currency(code: "EUR"))
+                            .foregroundStyle(.white)
+                    }
                     .foregroundStyle(category.color)
                 }
                 .padding()
                 .frame(height: 300)
+                .chartBackground { _ in
+                    Image(systemName: "dollarsign.ring.dashed")
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                }
             }
         }
     }

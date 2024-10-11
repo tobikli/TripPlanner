@@ -13,19 +13,22 @@ struct AddEventView: View {
     
     @State var viewModel: AddEventViewModel
     
+    @Binding var showAlert: Bool
+    
     var modelContext: ModelContext
 
     var trip: Trip
     
-    init(modelContext: ModelContext, trip: Trip) {
+    init(modelContext: ModelContext, trip: Trip, showAlert: Binding<Bool>) {
         self.modelContext = modelContext
         self.trip = trip
         self._viewModel = State(wrappedValue: AddEventViewModel(modelContext: modelContext, trip: trip))
+        self._showAlert = showAlert
     }
 
 
     var body: some View {
-            NavigationView {
+        NavigationStack {
                 Form {
                     CategoryPicker(category: $viewModel.category)
                     if viewModel.category == "Flight" {
@@ -49,13 +52,14 @@ struct AddEventView: View {
                     }
                     ToolbarItem(placement: .confirmationAction) {
                         Button("Create") {
-                            viewModel.addItem()
+                            viewModel.addEvent()
+                            showAlert.toggle()
                             dismiss()
                         }
                     }
                 }
-            }
         }
+    }
    
     
     struct CategoryPicker: View {

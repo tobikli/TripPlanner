@@ -28,11 +28,17 @@ import SwiftData
     }
     
     
-    func addItem() {
+    func addEvent() {
         withAnimation {
-            let newItem = Event(name: name, location: location, date: date, cost: cost, category: category)
-            modelContext.insert(newItem)
-            trip.events.append(newItem)
+            let newEvent = Event(
+                name: name,
+                location: location,
+                date: date,
+                cost: cost,
+                category: category,
+                flightNumber: flightNumber)
+            modelContext.insert(newEvent)
+            trip.events.append(newEvent)
         }
     }
 }
