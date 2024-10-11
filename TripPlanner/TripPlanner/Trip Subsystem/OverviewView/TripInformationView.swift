@@ -17,7 +17,7 @@ struct TripInformationSection: View {
                 ZStack(alignment: .trailing) {
                     TextField("Trip Name:", text: $trip.name)
                     Image(systemName: "pencil")
-                        .background(.blue)
+                        .foregroundColor(.blue)
                 }
                 ZStack(alignment: .trailing) {
                     TextField("Location:", text: $trip.location)

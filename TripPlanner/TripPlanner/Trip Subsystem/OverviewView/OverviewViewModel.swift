@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import UIKit
 
 @Observable class OverviewViewModel {
     var trip: Trip

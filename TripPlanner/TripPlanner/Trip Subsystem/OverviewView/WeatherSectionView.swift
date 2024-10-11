@@ -19,7 +19,7 @@ struct WeatherSection: View {
                 if validWeather {
                     Spacer()
                     Text("The weather currently in \(location)")
-                        .font(.headline)
+                        .font(.custom("Ultrathins", size: 18))
                         .frame(maxWidth: .infinity, alignment: .center)
                     Spacer()
                     HStack {
@@ -31,6 +31,7 @@ struct WeatherSection: View {
                         Text(temperature)
                             .font(.system(size: 40))
                     }
+                    Spacer()
                 } else {
                     Text("Could not fetch weather")
                         .foregroundStyle(.red)

@@ -38,7 +38,7 @@ struct ScheduleView: View {
                             .onDelete(perform: deleteItems)
                         }
                     }
-                    .listStyle(.insetGrouped)
+                    .listStyle(.grouped)
                 }
             }
             .navigationBarTitle("Schedule", displayMode: .inline)
