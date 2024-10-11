@@ -9,13 +9,13 @@ import SwiftUI
 import SwiftData
 
 @Observable class TripSectionViewModel : ObservableObject {
-    let deleteAction: (IndexSet) -> Void
     let type: String
     let calendar = Calendar.current
     var modelContext: ModelContext
+    var trips: [Trip] = []
 
-    init(trips: [Trip], deleteAction: @escaping (IndexSet) -> Void, type: String, modelContext: ModelContext) {
-        self.deleteAction = deleteAction
+    init(trips: [Trip], type: String, modelContext: ModelContext) {
+        self.trips = trips
         self.type = type
         self.modelContext = modelContext
     }
@@ -43,6 +43,14 @@ import SwiftData
             }
         default:
             return fetchTrips()
+        }
+    }
+    
+    func deleteItems(offsets: IndexSet) {
+        withAnimation {
+            for index in offsets {
+                modelContext.delete(trips[index])
+            }
         }
     }
 }

@@ -8,9 +8,15 @@
 import SwiftUI
 
 struct ComingUpSection: View {
+    var viewModel: OverviewViewModel
+
     var body: some View {
         Section(header: Text("Coming Up")) {
-            Text("TODO")
+            if let firstEvent = viewModel.getFirstEvent() {
+                EventBox(event: firstEvent)
+            } else {
+                Text("No upcoming Events")
+            }
         }
     }
 }

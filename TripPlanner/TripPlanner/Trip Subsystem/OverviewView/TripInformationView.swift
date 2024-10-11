@@ -8,12 +8,26 @@
 import SwiftUI
 
 struct TripInformationSection: View {
-    var trip: Trip
+    @State var trip: Trip
+    @Binding var editMode: Bool
     
     var body: some View {
         Section(header: Text("Trip Information")) {
-            Text("Trip Name: \(trip.name)")
-            Text("Location: \(trip.location)")
+            if editMode {
+                ZStack(alignment: .trailing) {
+                    TextField("Trip Name:", text: $trip.name)
+                    Image(systemName: "pencil")
+                        .background(.blue)
+                }
+                ZStack(alignment: .trailing) {
+                    TextField("Location:", text: $trip.location)
+                    Image(systemName: "pencil")
+                        .foregroundColor(.blue)
+                }
+            } else {
+                Text("Trip Name: \(trip.name)")
+                Text("Location: \(trip.location)")
+            }
         }
     }
 }

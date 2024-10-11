@@ -65,7 +65,13 @@ struct EventBox: View {
         HStack {
             Image(systemName: "arrow.down")
             Image(systemName: getIconName(category: event.category))
-            Text(event.name)
+            Spacer()
+            VStack {
+                Text(event.name)
+                    .font(.headline)
+                Text(event.date.formatted(.dateTime))
+            }
+            Spacer()
         }
     }
 }

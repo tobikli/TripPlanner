@@ -10,24 +10,23 @@ import MapKit
 
 struct OverviewView: View {
     @State var overviewViewModel: OverviewViewModel
-    @State private var showingAddItemView = false
+    @State private var editMode = false
 
     var body: some View {
         NavigationView {
             Form {
-                TripInformationSection(trip: overviewViewModel.trip)
-                DatesSection(from: overviewViewModel.trip.from.formatted(),
-                             till: overviewViewModel.trip.till.formatted())
+                TripInformationSection(trip: overviewViewModel.trip, editMode: $editMode)
+                DatesSection(trip: overviewViewModel.trip, editMode: $editMode)
                 WeatherSection(validWeather: overviewViewModel.validWeather,
                                location: overviewViewModel.trip.location,
                                weatherIcon: overviewViewModel.weatherIcon,
                                temperature: overviewViewModel.temperature)
-                ComingUpSection()
+                ComingUpSection(viewModel: overviewViewModel)
                 
                 Button(action: {
-                    showingAddItemView.toggle()
+                    editMode.toggle()
                 }) {
-                    Label("Edit Trip", systemImage: "pencil")
+                    editMode ? Label("Done", systemImage: "checkmark") : Label("Edit Trip", systemImage: "pencil")
                 }
             }
             .navigationTitle(overviewViewModel.trip.name)

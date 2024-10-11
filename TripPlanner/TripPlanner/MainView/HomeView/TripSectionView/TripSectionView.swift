@@ -24,7 +24,6 @@ struct  TripSectionView: View {
         self.type = type
         self._viewModel = State(
             wrappedValue: TripSectionViewModel(trips: trips,
-                                               deleteAction: deleteAction,
                                                type: type,
                                                modelContext: modelContext))
     }
@@ -38,7 +37,7 @@ struct  TripSectionView: View {
                         TripBox(trip: trip)
                     }
             }
-            .onDelete(perform: viewModel.deleteAction)
+            .onDelete(perform: deleteAction)
         }
     }
 }

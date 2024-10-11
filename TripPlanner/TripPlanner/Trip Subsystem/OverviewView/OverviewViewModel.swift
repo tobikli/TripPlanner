@@ -44,4 +44,12 @@ import SwiftData
             temperature = String(format: "%.1f", tempDouble) + " °C"
         }
     }
+    
+    func getFirstEvent() -> Event? {
+        if trip.events.isEmpty {
+            return nil
+        } else {
+            return trip.events.sorted(by: { $0.date < $1.date })[0]
+        }
+    }
 }
