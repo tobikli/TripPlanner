@@ -9,7 +9,6 @@ import SwiftUI
 import MapKit
 
 struct MapView: View {
-    
     @State var mapViewModel: MapViewModel
 
     var body: some View {
@@ -22,4 +21,3 @@ struct MapView: View {
             )))
     }
 }
-
