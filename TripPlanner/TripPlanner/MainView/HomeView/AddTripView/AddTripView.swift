@@ -13,11 +13,14 @@ struct AddTripView: View {
 
     var modelContext: ModelContext
     
+    @Binding var showAlert: Bool
+    
     @State var viewModel: AddTripViewModel
 
-    init(modelContext: ModelContext) {
+    init(modelContext: ModelContext, showAlert: Binding<Bool>) {
         self.modelContext = modelContext
         self._viewModel = State(wrappedValue: AddTripViewModel(modelContext: modelContext))
+        self._showAlert = showAlert
     }
     
     var body: some View {
@@ -47,6 +50,7 @@ struct AddTripView: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Create") {
                         viewModel.addItem()
+                        showAlert.toggle()
                         dismiss()
                     }
                 }

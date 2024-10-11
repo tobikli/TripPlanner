@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		F63E041E2CB921CC00F38F7A /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = F63E041D2CB921CC00F38F7A /* AlertToast */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		F6D821B52CB50E9C00A2E437 /* TripPlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TripPlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F63E041E2CB921CC00F38F7A /* AlertToast in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +84,7 @@
 			);
 			name = TripPlanner;
 			packageProductDependencies = (
+				F63E041D2CB921CC00F38F7A /* AlertToast */,
 			);
 			productName = TripPlanner;
 			productReference = F6D821B52CB50E9C00A2E437 /* TripPlanner.app */;
@@ -108,6 +114,9 @@
 			);
 			mainGroup = F6D821AC2CB50E9C00A2E437;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				F63E041C2CB921CC00F38F7A /* XCRemoteSwiftPackageReference "AlertToast" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F6D821B62CB50E9C00A2E437 /* Products */;
 			projectDirPath = "";
@@ -362,6 +371,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F63E041C2CB921CC00F38F7A /* XCRemoteSwiftPackageReference "AlertToast" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elai950/AlertToast?tab=readme-ov-file";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.9;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F63E041D2CB921CC00F38F7A /* AlertToast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F63E041C2CB921CC00F38F7A /* XCRemoteSwiftPackageReference "AlertToast" */;
+			productName = AlertToast;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F6D821AD2CB50E9C00A2E437 /* Project object */;
 }

@@ -7,11 +7,13 @@
 
 import SwiftUI
 import SwiftData
+import AlertToast
 
 struct HomeView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var trips: [Trip]
     @State private var showingAddItemView = false
+    @State private var showToast = false
     
     var body: some View {
             NavigationView {
@@ -43,10 +45,15 @@ struct HomeView: View {
                     }
                     .navigationTitle(Text("TripPlanner"))
                     .sheet(isPresented: $showingAddItemView) {
-                        AddTripView(modelContext: modelContext)
+                        AddTripView(modelContext: modelContext, showAlert: $showToast)
                     }
                     .listStyle(.grouped)
                 }
+            }.toast(isPresenting: $showToast, duration: 3) {
+                AlertToast(displayMode: .banner(.pop),
+                           type: .complete(.primary),
+                           title: "Created new Trip",
+                           subTitle: "Your trip has been created successfully")
             }
         }
     

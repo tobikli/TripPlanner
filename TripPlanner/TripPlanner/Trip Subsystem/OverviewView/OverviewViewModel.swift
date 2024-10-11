@@ -8,9 +8,11 @@
 import Foundation
 import SwiftData
 import UIKit
+import os
 
 @Observable class OverviewViewModel {
     var trip: Trip
+    var logger: Logger
     
     var weatherIcon: String = "cloud.sun.fill"
     var temperature: String = "Loading..."  // Start with a loading state
@@ -20,6 +22,7 @@ import UIKit
     
     init(trip: Trip) {
         self.trip = trip
+        self.logger = Logger()
         Task {
             await requestLocation()
             await requestWeather()
@@ -31,7 +34,6 @@ import UIKit
         let (lat, long) = await weatherAPI.getLocation()  // Await temperature data
         latitude = lat
         longitude = long
-        print(latitude, longitude)
     }
     
     func requestWeather() async {

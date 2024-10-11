@@ -19,7 +19,7 @@ struct WeatherSection: View {
                 if validWeather {
                     Spacer()
                     Text("The weather currently in \(location)")
-                        .font(.custom("Ultrathins", size: 18))
+                        .font(.custom("MediteraRounded-RegularDemo", size: 18))
                         .frame(maxWidth: .infinity, alignment: .center)
                     Spacer()
                     HStack {
