@@ -60,10 +60,12 @@ The app should:
 
 | Version | Task                                | Done |
 | - | ----------------------------------------- | ---- |
-| 1 | Create UI for Trip creation               |      |
-| 2 | Add Location and Time to Trip             |      |
-| 3 | Add Budget UI                             |      |
-| 3 | Add Event creation UI                     |      |
-| 3 | See Schedule of Trip                      |      |
+| 1 | Create UI for Trip creation               |   ✓  |
+| 2 | Add Location and Time to Trip             |   ✓  |
+| 2 | Add Budget UI                             |   ✓  |
+| 2 | Add Event creation UI                     |   ✓  |
+| 2 | See Schedule of Trip                      |   ✓  |
+| 2 | Fetch WeatherAPI                          |   ✓  |
 | 3 | Fetch FlightAPI                           |      |
-| 3 | Fetch WeatherAPI                          |      |
+| 3 | Event Detail View                         |      |
+| 3 | Event Locations in Map                    |      |
