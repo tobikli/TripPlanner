@@ -30,8 +30,10 @@ import os
     
     func requestWeather() async {
         let weatherAPI = WeatherAPI(location: trip.location)
-        let tempDouble = await weatherAPI.getTemperature()  // Await temperature data
-        let condition = weatherAPI.getWeatherCondition()  // Await temperature data
+        let tempDouble = await weatherAPI.getTemperature()
+        let condition = weatherAPI.getWeatherCondition()
+        logger.info("Decoded temperature: \(tempDouble)")
+        logger.info("Decoded condition: \(condition)")
         if condition == "Unknown" && tempDouble == -1.0 {
             validWeather = false
         } else {

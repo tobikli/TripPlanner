@@ -5,7 +5,7 @@ import AlertToast
 struct ScheduleView: View {
     @State private var trip: Trip
     
-    @State private var showingAddItemView = false
+    @State private var showingAddEventView = false
     
     @State private var showAlert = false
     
@@ -19,10 +19,10 @@ struct ScheduleView: View {
     var body: some View {
             VStack {
                 Button(action: {
-                    showingAddItemView.toggle()
+                    showingAddEventView.toggle()
                 }) {
                     Label("Add Event", systemImage: "plus")
-                }.padding(.vertical, 2)
+                }
                 if trip.events.isEmpty {
                     Text("No Events yet")
                         .font(.headline)
@@ -45,7 +45,7 @@ struct ScheduleView: View {
                 }
             }
             .navigationBarTitle("Schedule", displayMode: .inline)
-            .sheet(isPresented: $showingAddItemView) {
+            .sheet(isPresented: $showingAddEventView) {
                 AddEventView(modelContext: modelContext, trip: trip, showAlert: $showAlert)
             }
             .toast(isPresenting: $showAlert, duration: 3) {
