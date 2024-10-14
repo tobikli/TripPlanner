@@ -18,6 +18,7 @@ struct MapView: View {
                     latitude: mapViewModel.latitude,
                     longitude: mapViewModel.longitude),
                 span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-            )))
+            ))
+        )
     }
 }

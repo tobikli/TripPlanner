@@ -14,7 +14,6 @@ struct BudgetView: View {
     @FocusState var isInputActive: Bool
     
     var body: some View {
-        NavigationStack {
             Form {
                 Section(header: Text("Total Budget")) {
                     ZStack(alignment: .trailing) {
@@ -38,15 +37,11 @@ struct BudgetView: View {
                 CategoriesSection(categories: categories)
                 DistributionSection(categories: categories)
             }
-            .navigationBarTitle("Budget")
-            .navigationBarTitleDisplayMode(.inline)
             .onAppear {
                 categories = trip.getUsedByCategory()
             }
         }
     }
-}
-
 
 #Preview {
     BudgetView(trip: Trip(name: "Cool Trip", location: "Munich", from: Date(), till: Date(), budget: 100))

@@ -28,6 +28,9 @@ import os
         }
     }
     
+    /**
+        Fetches the WeatherData from the WeatherAPI to display them on the Overview
+     */
     func requestWeather() async {
         let weatherAPI = WeatherAPI(location: trip.location)
         let tempDouble = await weatherAPI.getTemperature()
@@ -42,6 +45,9 @@ import os
         }
     }
     
+    /**
+        Gets the first schedule of the Trip to show it on the Overview for convenience
+     */
     func getFirstEvent() -> Event? {
         if trip.events.isEmpty {
             return nil

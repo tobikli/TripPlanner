@@ -11,16 +11,20 @@ import Foundation
 class WeatherAPI {
     ///Weather apiKey and URL for fetching Weather Data based on Location
     private let apiKey: String = "a880585761d5deda9a7f82a4fbf2e08c"
-    private let baseURL1: String = "https://api.openweathermap.org/data/2.5/weather?q="
-    private let baseURL2: String = "&appid=a880585761d5deda9a7f82a4fbf2e08c"
+    private var baseURL: String = ""
     
-    var location: String
     var weatherResponse: WeatherResponse?
     
-    init(location: String) {
-            self.location = location
-        }
+    var location: String
     
+    init(location: String) {
+        self.location = location
+        baseURL = "https://api.openweathermap.org/data/2.5/weather?q=\(location)&appid=a880585761d5deda9a7f82a4fbf2e08c"
+    }
+    
+    /**
+        Calls the fetchWeather function to handle Errors
+     */
     func fetchWeatherCaller(for location: String) async {
         do {
             weatherResponse = try await fetchWeather(for: location)
@@ -28,6 +32,9 @@ class WeatherAPI {
         }
     }
     
+    /**
+        Returns the stored Latitude and Longtitude as Tuple from the WeatherResponse
+     */
     func getLocation() async -> (Double, Double) {
         if let real = weatherResponse {
             return (real.coord.lat, real.coord.lon)
@@ -41,6 +48,9 @@ class WeatherAPI {
         }
     }
     
+    /**
+        Returns the stored Temperature as Double from the WeatherResponse
+     */
     func getTemperature() async -> Double {
         if let real = weatherResponse {
             return real.main.temp - 273.15
@@ -54,6 +64,9 @@ class WeatherAPI {
         }
     }
     
+    /**
+        Converts the stored WeatherCondition to a String of a IconName to show in the OverView Tab
+     */
     func getWeatherCondition() -> String {
         guard let weather = weatherResponse?.weather.first else {
             return "Unknown"
@@ -72,9 +85,12 @@ class WeatherAPI {
         }
     }
     
-    ///Takes location as string and returns temperature, state, and validity
+    /**
+        Fetches the Weather from the API based on the Location provided as String
+        Returns nil if URL can not be created
+     */
     func fetchWeather(for location: String) async throws -> WeatherResponse? {
-        guard let url = URL(string: baseURL1 + location + baseURL2) else {
+        guard let url = URL(string: baseURL) else {
             return nil
         }
         let (data, _) = try await URLSession.shared.data(from: url)
@@ -105,6 +121,9 @@ struct Main: Codable {
     let temp: Double
 }
 
+/**
+    Takes the Response of the API  in JSON format and tries to decode it to a WeatherResponse struct
+ */
 func decodeWeatherResponse(jsonData: Data) -> WeatherResponse? {
     let decoder = JSONDecoder()
     do {

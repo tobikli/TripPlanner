@@ -18,7 +18,7 @@ import SwiftData
     var date = Date()
     var cost: Double = 0.0
     var category: String = "Flight"
-    var flightNumber: String?
+    var flightNumber: String = ""
     
     var trip: Trip
     
@@ -27,7 +27,9 @@ import SwiftData
         self.trip = trip
     }
     
-    
+    /**
+        Adds the newly created Event to the viewModel and to the trip
+     */
     func addEvent() {
         withAnimation {
             let newEvent = Event(

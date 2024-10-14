@@ -33,10 +33,7 @@ struct AddEventView: View {
                     CategoryPicker(category: $viewModel.category)
                     if viewModel.category == "Flight" {
                         Section(header: Text("Flight Information")) {
-                            TextField("Flight Number", text: Binding(
-                                get: { viewModel.flightNumber ?? "" },
-                                set: { viewModel.flightNumber = $0.isEmpty ? nil : $0 }
-                            ))
+                            TextField("Flight Number", text: $viewModel.flightNumber)
                         }
                     }
                     InformationSection(name: $viewModel.name, location: $viewModel.location)

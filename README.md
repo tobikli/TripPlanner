@@ -66,6 +66,6 @@ The app should:
 | 2 | Add Event creation UI                     |   ✓  |
 | 2 | See Schedule of Trip                      |   ✓  |
 | 2 | Fetch WeatherAPI                          |   ✓  |
-| 3 | Fetch FlightAPI                           |      |
-| 3 | Event Detail View                         |      |
-| 3 | Event Locations in Map                    |      |
+| 3 | Fetch FlightAPI                           |  (x) |
+| 3 | Event Detail View                         |   ✓  |
+| 3 | Event Locations in Map                    |  (x) |

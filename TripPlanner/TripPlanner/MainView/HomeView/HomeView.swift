@@ -30,6 +30,7 @@ struct HomeView: View {
                         TripSectionView(trips: trips, deleteAction: deleteItems, type: "Future", mC: modelContext)
                         TripSectionView(trips: trips, deleteAction: deleteItems, type: "Past", mC: modelContext)
                     }
+                    .listRowSpacing(5)
                     .listStyle(.sidebar)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
@@ -47,7 +48,6 @@ struct HomeView: View {
                     .sheet(isPresented: $showingAddTripView) {
                         AddTripView(modelContext: modelContext, showAlert: $showToast)
                     }
-                    .listStyle(.grouped)
                     .toast(isPresenting: $showToast) {
                         AlertToast(displayMode: .banner(.slide), type: .complete(.primary), title: "Created new Trip")
                     }
