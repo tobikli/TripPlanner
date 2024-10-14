@@ -15,7 +15,8 @@ import SwiftData
     
     var name: String = ""
     var location: String = ""
-    var date = Date()
+    var from = Date()
+    var until = Date()
     var cost: Double = 0.0
     var category: String = "Flight"
     var flightNumber: String = ""
@@ -35,7 +36,8 @@ import SwiftData
             let newEvent = Event(
                 name: name,
                 location: location,
-                date: date,
+                from: from,
+                until: until,
                 cost: cost,
                 category: category,
                 flightNumber: flightNumber)

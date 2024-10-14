@@ -30,7 +30,8 @@ struct EventDetailView: View {
                     } else {
                         Text("Name: \(event.name)")
                         Text("Location: \(event.location)")
-                        Text("Date: \(event.date.formatted())")
+                        Text("From: \(event.from.formatted())")
+                        Text("Until: \(event.until.formatted())")
                         Text("Cost: \(event.cost.formatted(.currency(code: "EUR")))")
                     }
                 }
@@ -76,7 +77,8 @@ struct EventDetailView: View {
                 Image(systemName: "pencil")
                     .foregroundColor(.blue)
             }
-            DatePicker("Date", selection: $event.date)
+            DatePicker("From", selection: $event.from)
+            DatePicker("Until", selection: $event.until)
             ZStack(alignment: .trailing) {
                 TextField(
                     event.cost.formatted(.currency(code: "EUR")),

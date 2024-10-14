@@ -29,7 +29,7 @@ import os
     }
     
     /**
-        Fetches the WeatherData from the WeatherAPI to display them on the Overview
+     Fetches the WeatherData from the WeatherAPI to display them on the Overview
      */
     func requestWeather() async {
         let weatherAPI = WeatherAPI(location: trip.location)
@@ -46,13 +46,13 @@ import os
     }
     
     /**
-        Gets the first schedule of the Trip to show it on the Overview for convenience
+     Gets the first schedule of the Trip to show it on the Overview for convenience
      */
     func getFirstEvent() -> Event? {
-        if trip.events.isEmpty {
-            return nil
-        } else {
-            return trip.events.sorted(by: { $0.date < $1.date })[0]
-        }
+        let futureEvents = trip.events
+            .filter { $0.until >= Date.now }
+            .sorted { $0.from < $1.from }
+
+        return futureEvents.isEmpty ? nil : futureEvents.first
     }
 }

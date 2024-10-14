@@ -13,7 +13,11 @@ struct ComingUpSection: View {
     var body: some View {
         Section(header: Text("Coming Up")) {
             if let firstEvent = viewModel.getFirstEvent() {
-                EventBox(event: firstEvent)
+                NavigationLink {
+                    EventDetailView(event: firstEvent)
+                } label: {
+                    EventBox(event: firstEvent)
+                }
             } else {
                 Text("No upcoming Events")
             }

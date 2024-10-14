@@ -37,7 +37,7 @@ struct AddEventView: View {
                         }
                     }
                     InformationSection(name: $viewModel.name, location: $viewModel.location)
-                    TimeSection(date: $viewModel.date)
+                    TimeSection(from: $viewModel.from, until: $viewModel.until)
                     PriceSection(cost: $viewModel.cost)
                 }
                 .navigationTitle("Create New Event")
@@ -87,11 +87,13 @@ struct AddEventView: View {
     }
 
     struct TimeSection: View {
-        @Binding var date: Date
-        
+        @Binding var from: Date
+        @Binding var until: Date
+
         var body: some View {
             Section(header: Text("Time")) {
-                DatePicker("Date", selection: $date)
+                DatePicker("From", selection: $from)
+                DatePicker("Until", selection: $until)
             }
         }
     }
