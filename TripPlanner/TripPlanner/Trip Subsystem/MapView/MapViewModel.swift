@@ -9,6 +9,7 @@
 import Foundation
 import SwiftData
 
+///View Model for the MapView
 @Observable class MapViewModel {
     var trip: Trip
 

@@ -8,6 +8,7 @@
 import Foundation
 import SwiftData
 
+///Model for an Event
 @Model
 final class Event {
     var name: String

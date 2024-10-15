@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 
+///View Model for the TripSectionView
 @Observable class TripSectionViewModel {
     let type: String
     let calendar = Calendar.current

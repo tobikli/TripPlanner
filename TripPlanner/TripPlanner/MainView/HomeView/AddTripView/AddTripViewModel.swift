@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 
+///View Model for the AddTrip View
 @Observable class AddTripViewModel {
     var modelContext: ModelContext
     

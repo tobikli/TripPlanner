@@ -8,6 +8,7 @@
 import Foundation
 import SwiftData
 
+///The Class for calculating the different Budget data
 @Model
 class BudgetManager {
     var trip: Trip

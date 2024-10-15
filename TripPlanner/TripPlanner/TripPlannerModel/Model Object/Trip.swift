@@ -9,6 +9,7 @@ import Foundation
 import SwiftData
 import SwiftUI
 
+///Model for a trip
 @Model
 final class Trip {
     var name: String
@@ -26,6 +27,9 @@ final class Trip {
         self.budget = budget
     }
     
+    /**
+     returns the summed up amount of all event costs of the given trip
+     */
     func getUsedAmount() -> Double {
         var used = 0.0
         for event in events {
@@ -34,6 +38,9 @@ final class Trip {
         return used
     }
     
+    /**
+     returns an array of all used categories of the trip including the total cost of this category
+     */
     func getUsedByCategory() -> [Category] {
         var categoriesDict: [String: Category] = [:]
         
@@ -56,10 +63,16 @@ final class Trip {
         return Array(categoriesDict.values)
     }
     
+    /**
+     returns the defined budget of the trip
+     */
     func getBudget() -> Double {
         return budget
     }
     
+    /**
+     matches the category name to the fitting color for graph representation
+     */
     func matchColor(category: String) -> Color {
         switch category {
         case "Flight": return .red

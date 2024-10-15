@@ -7,7 +7,7 @@
 
 import Foundation
 
-
+///Class for interacting with the Weather API and fetch the corresponding Data
 class WeatherAPI {
     ///Weather apiKey and URL for fetching Weather Data based on Location
     private let apiKey: String = "a880585761d5deda9a7f82a4fbf2e08c"

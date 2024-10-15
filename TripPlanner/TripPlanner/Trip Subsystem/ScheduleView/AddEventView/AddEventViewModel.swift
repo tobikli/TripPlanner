@@ -10,6 +10,7 @@ import Foundation
 import SwiftUI
 import SwiftData
 
+///View Model for the AddEventView
 @Observable class AddEventViewModel {
     var modelContext: ModelContext
     
