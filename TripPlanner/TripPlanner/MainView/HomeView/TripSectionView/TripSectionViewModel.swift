@@ -22,6 +22,9 @@ import SwiftData
     }
     /**
      Fetches the already stored trips from the database and returns them as an array
+         params: none
+         returns: returns array of trips from the database
+         throws: none
      */
     func fetchTrips() -> [Trip] {
         let fetchDescriptor = FetchDescriptor<Trip>()
@@ -36,6 +39,9 @@ import SwiftData
 
     /**
      Filters the trips to their fitting category, if they are current, past or future
+         params: none
+         returns: returns array of trips filtered by Date
+         throws: none
      */
     func getTrips() -> [Trip] {
         switch type {
@@ -56,6 +62,9 @@ import SwiftData
 
     /**
      Deletes the trip from the modelContext with Animation
+         params: offset of where the trip should be deleted from the modelContext
+         returns: none
+         throws: none
      */
     func deleteItems(offsets: IndexSet) {
         withAnimation {

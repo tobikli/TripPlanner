@@ -31,6 +31,9 @@ import SwiftData
 
     /**
      Adds the newly created Event to the viewModel and to the trip
+         params: none
+         returns: none
+         throws: none
      */
     func addEvent() {
         withAnimation {

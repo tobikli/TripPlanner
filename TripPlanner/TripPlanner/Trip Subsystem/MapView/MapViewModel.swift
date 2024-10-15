@@ -25,6 +25,9 @@ import SwiftData
 
     /**
      Fetches the Location of the trip through the WeatherAPI to show the correct Location on the Map
+         params: none
+         returns: none
+         throws: none
      */
     func requestLocation() async {
         let weatherAPI = WeatherAPI(location: trip.location)

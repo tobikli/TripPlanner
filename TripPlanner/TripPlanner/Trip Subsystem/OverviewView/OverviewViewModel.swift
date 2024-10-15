@@ -30,6 +30,9 @@ import os
 
     /**
      Fetches the WeatherData from the WeatherAPI to display them on the Overview
+         params: none
+         returns: none
+         throws: none
      */
     func requestWeather() async {
         let weatherAPI = WeatherAPI(location: trip.location)
@@ -47,6 +50,9 @@ import os
 
     /**
      Gets the first schedule of the Trip to show it on the Overview for convenience
+         params: none
+         returns: optional Event depending if it exists
+         throws: none
      */
     func getFirstEvent() -> Event? {
         let futureEvents = trip.events

@@ -24,6 +24,9 @@ class WeatherAPI {
 
     /**
      Calls the fetchWeather function to handle Errors
+        params: the location of where the weather should be fetched from as a String
+        returns: none
+        throws: none
      */
     func fetchWeatherCaller(for location: String) async {
         do {
@@ -34,6 +37,9 @@ class WeatherAPI {
 
     /**
      Returns the stored Latitude and Longtitude as Tuple from the WeatherResponse
+         params: none
+         returns: tuple of double corresponding to latitude and longtitude of the location
+         throws: none
      */
     func getLocation() async -> (Double, Double) {
         if let real = weatherResponse {
@@ -50,6 +56,9 @@ class WeatherAPI {
 
     /**
      Returns the stored Temperature as Double from the WeatherResponse
+         params: none
+         returns: double of the temperature of the location
+         throws: none
      */
     func getTemperature() async -> Double {
         if let real = weatherResponse {
@@ -66,6 +75,9 @@ class WeatherAPI {
 
     /**
      Converts the stored WeatherCondition to a String of a IconName to show in the OverView Tab
+         params: none
+         returns: the systemimage to the corresponding WeatherCondition as String
+         throws: none
      */
     func getWeatherCondition() -> String {
         guard let weather = weatherResponse?.weather.first else {
@@ -87,7 +99,9 @@ class WeatherAPI {
 
     /**
      Fetches the Weather from the API based on the Location provided as String
-     Returns nil if URL can not be created
+         params: none
+         returns: optional Weatherresponse depending if an error occurs
+         throws: URLError if URLSession fails
      */
     func fetchWeather() async throws -> WeatherResponse? {
         guard let url = URL(string: baseURL) else {
@@ -123,6 +137,9 @@ struct Main: Codable {
 
 /**
  Takes the Response of the API  in JSON format and tries to decode it to a WeatherResponse struct
+     params: takes Data in jsonFormat
+     returns: optional Weatherresponse depending if an error occurs
+     throws: none
  */
 func decodeWeatherResponse(jsonData: Data) -> WeatherResponse? {
     let decoder = JSONDecoder()

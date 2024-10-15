@@ -24,6 +24,9 @@ import SwiftData
 
     /**
      Adds the newly created Trip into the modelContext with an animation
+         params: none
+         returns: none
+         throws: none
      */
     func addTrip() {
         withAnimation {
