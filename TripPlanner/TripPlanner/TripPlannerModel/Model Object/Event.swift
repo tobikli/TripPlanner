@@ -18,7 +18,7 @@ final class Event {
     var cost: Double
     var category: String
     var flightNumber: String
-    
+
     init(
         name: String,
         location: String,

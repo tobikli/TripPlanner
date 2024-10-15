@@ -12,7 +12,7 @@ struct EventDetailView: View {
     @State var event: Event
     @State private var editMode = false
     @State private var showAlert = false
-    
+
     var body: some View {
         NavigationStack {
             Form {
@@ -62,10 +62,10 @@ struct EventDetailView: View {
             }
         )
     }
-    
+
     struct EventEditView: View {
         @Binding var event: Event
-        
+
         var body: some View {
             ZStack(alignment: .trailing) {
                 TextField(event.name, text: $event.name)

@@ -12,7 +12,7 @@ struct WeatherSection: View {
     var location: String
     var weatherIcon: String
     var temperature: String
-    
+
     var body: some View {
         Section(header: Text("Weather")) {
             VStack {

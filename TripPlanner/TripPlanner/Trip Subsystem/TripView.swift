@@ -11,9 +11,9 @@ import SwiftData
 struct TripView: View {
     var trip: Trip
     var modelContext: ModelContext
-    
+
     @State private var selectedTab: String = "Overview"
-    
+
     var body: some View {
         TabView(selection: $selectedTab) {
             OverviewView(overviewViewModel: OverviewViewModel(trip: trip))

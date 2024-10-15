@@ -12,9 +12,9 @@ struct AddTripView: View {
     @Environment(\.dismiss) private var dismiss
 
     var modelContext: ModelContext
-    
+
     @Binding var showAlert: Bool
-    
+
     @State var viewModel: AddTripViewModel
 
     init(modelContext: ModelContext, showAlert: Binding<Bool>) {
@@ -22,7 +22,7 @@ struct AddTripView: View {
         self._viewModel = State(wrappedValue: AddTripViewModel(modelContext: modelContext))
         self._showAlert = showAlert
     }
-    
+
     var body: some View {
         NavigationStack {
             Form {

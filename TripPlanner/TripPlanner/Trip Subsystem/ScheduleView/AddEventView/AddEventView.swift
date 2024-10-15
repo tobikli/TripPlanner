@@ -10,15 +10,15 @@ import SwiftData
 
 struct AddEventView: View {
     @Environment(\.dismiss) private var dismiss
-    
+
     @State var viewModel: AddEventViewModel
-    
+
     @Binding var showAlert: Bool
-    
+
     var modelContext: ModelContext
 
     var trip: Trip
-    
+
     init(modelContext: ModelContext, trip: Trip, showAlert: Binding<Bool>) {
         self.modelContext = modelContext
         self.trip = trip
@@ -29,39 +29,39 @@ struct AddEventView: View {
 
     var body: some View {
         NavigationStack {
-                Form {
-                    CategoryPicker(category: $viewModel.category)
-                    if viewModel.category == "Flight" {
-                        Section(header: Text("Flight Information")) {
-                            TextField("Flight Number", text: $viewModel.flightNumber)
-                        }
-                    }
-                    InformationSection(name: $viewModel.name, location: $viewModel.location)
-                    TimeSection(from: $viewModel.from, until: $viewModel.until)
-                    PriceSection(cost: $viewModel.cost)
-                }
-                .navigationTitle("Create New Event")
-                .toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button("Cancel") {
-                            dismiss()
-                        }
-                    }
-                    ToolbarItem(placement: .confirmationAction) {
-                        Button("Create") {
-                            viewModel.addEvent()
-                            showAlert.toggle()
-                            dismiss()
-                        }
+            Form {
+                CategoryPicker(category: $viewModel.category)
+                if viewModel.category == "Flight" {
+                    Section(header: Text("Flight Information")) {
+                        TextField("Flight Number", text: $viewModel.flightNumber)
                     }
                 }
+                InformationSection(name: $viewModel.name, location: $viewModel.location)
+                TimeSection(from: $viewModel.from, until: $viewModel.until)
+                PriceSection(cost: $viewModel.cost)
+            }
+            .navigationTitle("Create New Event")
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Create") {
+                        viewModel.addEvent()
+                        showAlert.toggle()
+                        dismiss()
+                    }
+                }
+            }
         }
     }
-   
-    
+
+
     struct CategoryPicker: View {
         @Binding var category: String
-        
+
         var body: some View {
             Picker("Event Category", selection: $category) {
                 Text("Flight").tag("Flight")
@@ -77,7 +77,7 @@ struct AddEventView: View {
     struct InformationSection: View {
         @Binding var name: String
         @Binding var location: String
-        
+
         var body: some View {
             Section(header: Text("Information")) {
                 TextField("Event Name", text: $name)
@@ -100,7 +100,7 @@ struct AddEventView: View {
 
     struct PriceSection: View {
         @Binding var cost: Double
-        
+
         var body: some View {
             Section(header: Text("Price")) {
                 TextField("Price", value: $cost, format: .currency(code: "EUR"))

@@ -18,7 +18,7 @@ final class Trip {
     var till: Date
     var events: [Event] = []
     var budget: Double
-    
+
     init(name: String, location: String, from: Date, till: Date, budget: Double) {
         self.name = name
         self.location = location
@@ -26,7 +26,7 @@ final class Trip {
         self.till = till
         self.budget = budget
     }
-    
+
     /**
      returns the summed up amount of all event costs of the given trip
      */
@@ -37,13 +37,13 @@ final class Trip {
         }
         return used
     }
-    
+
     /**
      returns an array of all used categories of the trip including the total cost of this category
      */
     func getUsedByCategory() -> [Category] {
         var categoriesDict: [String: Category] = [:]
-        
+
         for event in events {
             if let existingCategory = categoriesDict[event.category] {
                 let updatedCategory = Category(
@@ -59,17 +59,17 @@ final class Trip {
                 categoriesDict[event.category] = newCategory
             }
         }
-        
+
         return Array(categoriesDict.values)
     }
-    
+
     /**
      returns the defined budget of the trip
      */
     func getBudget() -> Double {
         return budget
     }
-    
+
     /**
      matches the category name to the fitting color for graph representation
      */

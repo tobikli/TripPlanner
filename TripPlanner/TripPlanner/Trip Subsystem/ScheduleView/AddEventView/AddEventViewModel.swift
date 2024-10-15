@@ -13,7 +13,7 @@ import SwiftData
 ///View Model for the AddEventView
 @Observable class AddEventViewModel {
     var modelContext: ModelContext
-    
+
     var name: String = ""
     var location: String = ""
     var from = Date()
@@ -21,16 +21,16 @@ import SwiftData
     var cost: Double = 0.0
     var category: String = "Flight"
     var flightNumber: String = ""
-    
+
     var trip: Trip
-    
+
     init(modelContext: ModelContext, trip: Trip) {
         self.modelContext = modelContext
         self.trip = trip
     }
-    
+
     /**
-        Adds the newly created Event to the viewModel and to the trip
+     Adds the newly created Event to the viewModel and to the trip
      */
     func addEvent() {
         withAnimation {

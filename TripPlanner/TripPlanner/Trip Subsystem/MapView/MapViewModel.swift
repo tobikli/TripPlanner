@@ -15,16 +15,16 @@ import SwiftData
 
     var latitude: Double = 48.1351
     var longitude: Double = 11.5820
-    
+
     init(trip: Trip) {
         self.trip = trip
         Task {
             await requestLocation()
         }
     }
-    
+
     /**
-        Fetches the Location of the trip through the WeatherAPI to show the correct Location on the Map
+     Fetches the Location of the trip through the WeatherAPI to show the correct Location on the Map
      */
     func requestLocation() async {
         let weatherAPI = WeatherAPI(location: trip.location)

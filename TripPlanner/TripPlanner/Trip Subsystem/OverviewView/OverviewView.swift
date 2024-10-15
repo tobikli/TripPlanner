@@ -13,7 +13,7 @@ struct OverviewView: View {
     @State var overviewViewModel: OverviewViewModel
     @State private var editMode = false
     @State private var showAlert = false
-    
+
     var body: some View {
         NavigationView {
             Form {

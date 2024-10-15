@@ -12,5 +12,5 @@ import SwiftUI
 
 @Observable public class Model {
     // The model is the shareModelContainer created in TripPlannerApp.swift
-    
+
 }

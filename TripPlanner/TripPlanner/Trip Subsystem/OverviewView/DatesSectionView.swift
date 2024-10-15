@@ -11,7 +11,7 @@ import SwiftUI
 struct DatesSection: View {
     @State var trip: Trip
     @Binding var editMode: Bool
-    
+
     var body: some View {
         Section(header: Text("Dates")) {
             if editMode {
@@ -23,7 +23,7 @@ struct DatesSection: View {
                     Spacer()
                     Text(trip.from.formatted())
                 }
-                
+
                 HStack {
                     Text("Until:")
                     Spacer()

@@ -10,7 +10,7 @@ import Charts
 
 struct DistributionSection: View {
     var categories: [Category]
-    
+
     var body: some View {
         Section(header: Text("Distribution")) {
             if categories.isEmpty {

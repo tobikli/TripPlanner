@@ -13,12 +13,12 @@ import SwiftData
 class BudgetManager {
     var trip: Trip
     var budget: Double
-    
+
     init(trip: Trip, budget: Double) {
         self.trip = trip
         self.budget = budget
     }
-    
+
     func getUsedAmount() -> Double {
         var used = 0.0
         for event in trip.events {
@@ -26,7 +26,7 @@ class BudgetManager {
         }
         return used
     }
-    
+
     func getUsedByCategory() -> [String: Double] {
         var usedByCategory: [String: Double] = [:]
         for event in trip.events {
@@ -34,7 +34,7 @@ class BudgetManager {
         }
         return usedByCategory
     }
-    
+
     func getBudget() -> Double {
         return budget
     }

@@ -13,12 +13,12 @@ struct MapView: View {
 
     var body: some View {
         Map(initialPosition: MapCameraPosition.region(
-            MKCoordinateRegion(
-                center: CLLocationCoordinate2D(
-                    latitude: mapViewModel.latitude,
-                    longitude: mapViewModel.longitude),
-                span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-            ))
+                MKCoordinateRegion(
+                    center: CLLocationCoordinate2D(
+                        latitude: mapViewModel.latitude,
+                        longitude: mapViewModel.longitude),
+                    span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+                ))
         )
     }
 }

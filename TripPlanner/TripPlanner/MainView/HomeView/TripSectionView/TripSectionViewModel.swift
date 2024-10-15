@@ -21,21 +21,21 @@ import SwiftData
         self.modelContext = modelContext
     }
     /**
-        Fetches the already stored trips from the database and returns them as an array
+     Fetches the already stored trips from the database and returns them as an array
      */
     func fetchTrips() -> [Trip] {
-            let fetchDescriptor = FetchDescriptor<Trip>()
-            do {
-                let trips = try modelContext.fetch(fetchDescriptor)
-                return trips
-            } catch {
-                print("Error fetching trips: \(error)")
-                return []
-            }
+        let fetchDescriptor = FetchDescriptor<Trip>()
+        do {
+            let trips = try modelContext.fetch(fetchDescriptor)
+            return trips
+        } catch {
+            print("Error fetching trips: \(error)")
+            return []
         }
-    
+    }
+
     /**
-        Filters the trips to their fitting category, if they are current, past or future
+     Filters the trips to their fitting category, if they are current, past or future
      */
     func getTrips() -> [Trip] {
         switch type {
@@ -53,9 +53,9 @@ import SwiftData
             return fetchTrips()
         }
     }
-    
+
     /**
-        Deletes the trip from the modelContext with Animation
+     Deletes the trip from the modelContext with Animation
      */
     func deleteItems(offsets: IndexSet) {
         withAnimation {
