@@ -10,7 +10,7 @@ import MapKit
 
 struct MapView: View {
     @State var mapViewModel: MapViewModel
-
+    
     var body: some View {
         Map(initialPosition: MapCameraPosition.region(
             MKCoordinateRegion(
@@ -18,6 +18,7 @@ struct MapView: View {
                     latitude: mapViewModel.latitude,
                     longitude: mapViewModel.longitude),
                 span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-            )))
+            ))
+        )
     }
 }

@@ -13,11 +13,11 @@ import SwiftData
 struct  TripSectionView: View {
     let deleteAction: (IndexSet) -> Void
     let type: String
-    
+
     var modelContext: ModelContext
 
     @State var viewModel: TripSectionViewModel
-    
+
     init(trips: [Trip], deleteAction: @escaping (IndexSet) -> Void, type: String, mC: ModelContext) {
         self.modelContext = mC
         self.deleteAction = deleteAction
@@ -31,11 +31,11 @@ struct  TripSectionView: View {
     var body: some View {
         Section(header: Text("\(viewModel.type) Trips")) {
             ForEach(viewModel.getTrips()) { trip in
-                    NavigationLink {
-                        TripView(trip: trip, modelContext: modelContext)
-                    } label: {
-                        TripBox(trip: trip)
-                    }
+                NavigationLink {
+                    TripView(trip: trip, modelContext: modelContext)
+                } label: {
+                    TripBox(trip: trip)
+                }
             }
             .onDelete(perform: deleteAction)
         }

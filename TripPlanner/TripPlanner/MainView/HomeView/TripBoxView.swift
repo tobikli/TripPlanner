@@ -25,19 +25,19 @@ struct TripBox: View {
             }
             .padding(.horizontal, 2)
             Spacer()
-            
+
             VStack(alignment: .center) {
                 Text(trip.from, format: Date.FormatStyle()
-                    .day(.twoDigits)
-                    .month(.abbreviated))
-                .fontWeight(.light)
-                .font(.system(size: 12))
-                .padding(.bottom, 2)
+                        .day(.twoDigits)
+                        .month(.abbreviated))
+                    .fontWeight(.light)
+                    .font(.system(size: 12))
+                    .padding(.bottom, 2)
                 Text(trip.till, format: Date.FormatStyle()
-                    .day(.twoDigits)
-                    .month(.abbreviated))
-                .fontWeight(.light)
-                .font(.system(size: 12))
+                        .day(.twoDigits)
+                        .month(.abbreviated))
+                    .fontWeight(.light)
+                    .font(.system(size: 12))
             }
             .padding(10)
             .overlay(

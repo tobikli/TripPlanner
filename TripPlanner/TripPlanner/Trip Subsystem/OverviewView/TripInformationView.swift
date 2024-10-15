@@ -10,7 +10,7 @@ import SwiftUI
 struct TripInformationSection: View {
     @State var trip: Trip
     @Binding var editMode: Bool
-    
+
     var body: some View {
         Section(header: Text("Trip Information")) {
             if editMode {

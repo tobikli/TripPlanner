@@ -4,6 +4,7 @@
 //
 //  Created by Tobias Klingenberg on 09.10.24.
 //
+
 import SwiftUI
 import SwiftData
 import AlertToast
@@ -12,7 +13,7 @@ struct OverviewView: View {
     @State var overviewViewModel: OverviewViewModel
     @State private var editMode = false
     @State private var showAlert = false
-    
+
     var body: some View {
         NavigationView {
             Form {
@@ -37,7 +38,7 @@ struct OverviewView: View {
                     }
                     editMode.toggle()
                 }) {
-                    editMode ? Label("Done", systemImage: "checkmark") : Label("Edit", systemImage: "pencil")
+                    editMode ? Text("Done") : Text("Edit")
                 }
             )
         }

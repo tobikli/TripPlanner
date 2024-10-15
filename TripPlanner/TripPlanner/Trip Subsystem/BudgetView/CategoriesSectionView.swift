@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CategoriesSection: View {
     var categories: [Category]
-    
+
     var body: some View {
         Section(header: Text("Categories")) {
             if categories.isEmpty {

@@ -10,7 +10,7 @@ import Charts
 
 struct DistributionSection: View {
     var categories: [Category]
-    
+
     var body: some View {
         Section(header: Text("Distribution")) {
             if categories.isEmpty {
@@ -25,15 +25,14 @@ struct DistributionSection: View {
                     .annotation(position: .overlay) {
                         Text(category.amount, format: .currency(code: "EUR"))
                             .foregroundStyle(.white)
+                            .font(.system(size: 12))
                     }
                     .foregroundStyle(category.color)
                 }
                 .padding()
                 .frame(height: 300)
                 .chartBackground { _ in
-                    Image(systemName: "dollarsign.ring.dashed")
-                        .resizable()
-                        .frame(width: 40, height: 40)
+                    Text("Categories")
                 }
             }
         }
