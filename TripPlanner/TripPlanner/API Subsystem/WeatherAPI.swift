@@ -27,7 +27,7 @@ class WeatherAPI {
      */
     func fetchWeatherCaller(for location: String) async {
         do {
-            weatherResponse = try await fetchWeather(for: location)
+            weatherResponse = try await fetchWeather()
         } catch {
         }
     }
@@ -89,7 +89,7 @@ class WeatherAPI {
      Fetches the Weather from the API based on the Location provided as String
      Returns nil if URL can not be created
      */
-    func fetchWeather(for location: String) async throws -> WeatherResponse? {
+    func fetchWeather() async throws -> WeatherResponse? {
         guard let url = URL(string: baseURL) else {
             return nil
         }

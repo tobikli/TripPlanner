@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "TripPlanner_light 1.png",
+      "filename" : "TripPlanner_light.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -25,7 +25,6 @@
           "value" : "tinted"
         }
       ],
-      "filename" : "TripPlanner_dark 1.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
